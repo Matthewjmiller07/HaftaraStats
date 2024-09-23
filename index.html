@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Haftarah Explorer</title>
+  <!-- Include Chart.js from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Link to the CSS file -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Haftarah Explorer</h1>
+
+  <!-- Rite Selection -->
+  <div id="rite-selection">
+    <label><input type="checkbox" value="Ashkenazi" checked> Ashkenazi</label>
+    <label><input type="checkbox" value="Sephardi" checked> Sephardi</label>
+    <label><input type="checkbox" value="Yemenite" checked> Yemenite</label>
+    <label><input type="checkbox" value="Italian" checked> Italian</label>
+    <label><input type="checkbox" value="Karaite" checked> Karaite</label>
+  </div>
+
+  <!-- Canvas elements for charts -->
+  <canvas id="bookChart" width="800" height="400"></canvas>
+  <canvas id="lengthChart" width="800" height="400"></canvas>
+
+  <!-- Table for percentage data -->
+  <table id="percentageTable">
+    <thead>
+      <tr>
+        <th>Book</th>
+        <th>Ashkenazi</th>
+        <th>Sephardi</th>
+        <th>Yemenite</th>
+        <th>Italian</th>
+        <th>Karaite</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- Include the JavaScript file -->
+  <script src="script.js"></script>
+</body>
+</html>

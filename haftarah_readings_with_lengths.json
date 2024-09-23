@@ -1,0 +1,1822 @@
+{
+  "Bereshit": {
+    "Ashkenazi": {
+      "references": [
+        "Isaiah 42:5\u201343:10"
+      ],
+      "total_length": 31
+    },
+    "Sephardi": {
+      "references": [
+        "Isaiah 42:5\u201321"
+      ],
+      "total_length": 17
+    },
+    "Portuguese": {
+      "references": [
+        "Isaiah 42:5\u201321",
+        "Isaiah 61:10",
+        "Isaiah 62:5"
+      ],
+      "total_length": 19
+    },
+    "Italian": {
+      "references": [
+        "Isaiah 42:1\u201321"
+      ],
+      "total_length": 21
+    },
+    "Yemenite": {
+      "references": [
+        "Isaiah 42:1\u201316"
+      ],
+      "total_length": 16
+    },
+    "Romaniote": {
+      "references": [
+        "Isaiah 65:16\u201366:11"
+      ],
+      "total_length": 21
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 65:17\u201366:13"
+      ],
+      "total_length": 22
+    }
+  },
+  "Noach": {
+    "Ashkenazi": {
+      "references": [
+        "Isaiah 54:1\u201355:5"
+      ],
+      "total_length": 22
+    },
+    "Sephardi": {
+      "references": [
+        "Isaiah 54:1\u201310"
+      ],
+      "total_length": 10
+    },
+    "Italian": {
+      "references": [
+        "Isaiah 54:1\u201355:5"
+      ],
+      "total_length": 22
+    },
+    "Yemenite": {
+      "references": [
+        "Isaiah 54:1\u201355:5",
+        "Isaiah 54:1\u201355:3"
+      ],
+      "total_length": 42
+    },
+    "Romaniote": {
+      "references": [
+        "Isaiah 54:9\u201355:12"
+      ],
+      "total_length": 21
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 54:9\u201355:12"
+      ],
+      "total_length": 21
+    }
+  },
+  "Lech-Lecha": {
+    "Ashkenazi": {
+      "references": [
+        "Isaiah 40:27\u201341:16"
+      ],
+      "total_length": 21
+    },
+    "Sephardi": {
+      "references": [
+        "Isaiah 40:27\u201341:16"
+      ],
+      "total_length": 21
+    },
+    "Italian": {
+      "references": [
+        "Isaiah 40:25\u201341:17"
+      ],
+      "total_length": 24
+    },
+    "Yemenite": {
+      "references": [
+        "Isaiah 40:25\u201341:17"
+      ],
+      "total_length": 24
+    },
+    "Romaniote": {
+      "references": [
+        "Joshua 24:3\u201323"
+      ],
+      "total_length": 21
+    },
+    "Karaite": {
+      "references": [
+        "Joshua 24:3\u201318"
+      ],
+      "total_length": 16
+    }
+  },
+  "Vayeira": {
+    "Ashkenazi": {
+      "references": [
+        "II Kings 4:1\u201337"
+      ],
+      "total_length": 37
+    },
+    "Sephardi": {
+      "references": [
+        "II Kings 4:1\u201323"
+      ],
+      "total_length": 23
+    },
+    "Italian": {
+      "references": [
+        "II Kings 4:1\u201337"
+      ],
+      "total_length": 37
+    },
+    "Yemenite": {
+      "references": [
+        "II Kings 4:1\u201337"
+      ],
+      "total_length": 37
+    },
+    "Romaniote": {
+      "references": [
+        "Isaiah 33:17\u201334:13"
+      ],
+      "total_length": 21
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 33:17\u201335:12",
+        "Isaiah 35:10"
+      ],
+      "total_length": 36
+    }
+  },
+  "Chayei Sarah": {
+    "Ashkenazi": {
+      "references": [
+        "I Kings 1:1\u201331"
+      ],
+      "total_length": 31
+    },
+    "Sephardi": {
+      "references": [
+        "I Kings 1:1\u201331"
+      ],
+      "total_length": 31
+    },
+    "Yemenite": {
+      "references": [
+        "I Kings 1:1\u201331",
+        "I Kings 1:46"
+      ],
+      "total_length": 32
+    },
+    "Dardaim": {
+      "references": [
+        "I Kings 1:1\u201331"
+      ],
+      "total_length": 31
+    },
+    "Italian": {
+      "references": [
+        "I Kings 1:1\u201334"
+      ],
+      "total_length": 34
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 51:2\u201322"
+      ],
+      "total_length": 21
+    },
+    "Romaniote": {
+      "references": [
+        "Isaiah 51:2\u201322"
+      ],
+      "total_length": 21
+    }
+  },
+  "Toledot": {
+    "Ashkenazi": {
+      "references": [
+        "Malachi 1:1\u20132:7"
+      ],
+      "total_length": 21
+    },
+    "Sephardi": {
+      "references": [
+        "Malachi 1:1\u20132:7"
+      ],
+      "total_length": 21
+    },
+    "Italian": {
+      "references": [
+        "Malachi 1:1\u20132:7"
+      ],
+      "total_length": 21
+    },
+    "Yemenite": {
+      "references": [
+        "Malachi 1:1\u20133:4"
+      ],
+      "total_length": 35
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 65:23\u201366:18"
+      ],
+      "total_length": 21
+    },
+    "Romaniote": {
+      "references": [
+        "Isaiah 65:23\u201366:18"
+      ],
+      "total_length": 21
+    }
+  },
+  "Vayetze": {
+    "Ashkenazi": {
+      "references": [
+        "Hosea 12:13\u201314:10"
+      ],
+      "total_length": 28
+    },
+    "Sephardi": {
+      "references": [
+        "Hosea 11:7\u201312:12"
+      ],
+      "total_length": 17
+    },
+    "Italian": {
+      "references": [
+        "Hosea 11:7\u201312:14"
+      ],
+      "total_length": 19
+    },
+    "Yemenite": {
+      "references": [
+        "Hosea 11:7\u201312:14"
+      ],
+      "total_length": 19
+    },
+    "Karaite": {
+      "references": [
+        "Hosea 11:7\u201313:5"
+      ],
+      "total_length": 25
+    },
+    "Romaniote": {
+      "references": [
+        "Hosea 12:13\u201314:3"
+      ],
+      "total_length": 21
+    }
+  },
+  "Vayishlach": {
+    "Ashkenazi": {
+      "references": [
+        "Obadiah 1:1\u201321"
+      ],
+      "total_length": 21
+    },
+    "Sephardi": {
+      "references": [
+        "Obadiah 1:1\u201321"
+      ],
+      "total_length": 21
+    },
+    "Italian": {
+      "references": [
+        "Obadiah 1:1\u201321"
+      ],
+      "total_length": 21
+    },
+    "Yemenite": {
+      "references": [
+        "Obadiah 1:1\u201321"
+      ],
+      "total_length": 21
+    },
+    "Karaite": {
+      "references": [
+        "Obadiah 1:1\u201321"
+      ],
+      "total_length": 21
+    },
+    "Romaniote": {
+      "references": [
+        "Obadiah 1:1\u201321"
+      ],
+      "total_length": 21
+    }
+  },
+  "Vayeshev": {
+    "Ashkenazi": {
+      "references": [
+        "Amos 2:6\u20133:8"
+      ],
+      "total_length": 19
+    },
+    "Sephardi": {
+      "references": [
+        "Amos 2:6\u20133:8"
+      ],
+      "total_length": 19
+    },
+    "Italian": {
+      "references": [
+        "Amos 2:6\u20133:8"
+      ],
+      "total_length": 19
+    },
+    "Yemenite": {
+      "references": [
+        "Amos 2:6\u20133:8"
+      ],
+      "total_length": 19
+    },
+    "Romaniote": {
+      "references": [
+        "Isaiah 32:18\u201333:18"
+      ],
+      "total_length": 21
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 32:18\u201333:22"
+      ],
+      "total_length": 25
+    }
+  },
+  "Miketz": {
+    "Ashkenazi": {
+      "references": [
+        "I Kings 3:15\u20134:1"
+      ],
+      "total_length": 15
+    },
+    "Sephardi": {
+      "references": [
+        "I Kings 3:15\u20134:1"
+      ],
+      "total_length": 15
+    },
+    "Italian": {
+      "references": [
+        "I Kings 3:15\u201328"
+      ],
+      "total_length": 14
+    },
+    "Romaniote": {
+      "references": [
+        "Isaiah 29:7\u201330:4"
+      ],
+      "total_length": 22
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 29:7\u201324"
+      ],
+      "total_length": 18
+    }
+  },
+  "Vayigash": {
+    "Ashkenazi": {
+      "references": [
+        "Ezekiel 37:15\u201328"
+      ],
+      "total_length": 14
+    },
+    "Sephardi": {
+      "references": [
+        "Ezekiel 37:15\u201328"
+      ],
+      "total_length": 14
+    },
+    "Italian": {
+      "references": [
+        "Ezekiel 37:15\u201328"
+      ],
+      "total_length": 14
+    },
+    "Yemenite": {
+      "references": [
+        "Ezekiel 37:15\u201328"
+      ],
+      "total_length": 14
+    },
+    "Romaniote": {
+      "references": [
+        "Joshua 14:6\u201315:6"
+      ],
+      "total_length": 16
+    },
+    "Karaite": {
+      "references": [
+        "Joshua 14:6\u201314:15"
+      ],
+      "total_length": 10
+    }
+  },
+  "Vayechi": {
+    "Ashkenazi": {
+      "references": [
+        "I Kings 2:1\u201312"
+      ],
+      "total_length": 12
+    },
+    "Sephardi": {
+      "references": [
+        "I Kings 2:1\u201312"
+      ],
+      "total_length": 12
+    },
+    "Italian": {
+      "references": [
+        "I Kings 2:1\u201312"
+      ],
+      "total_length": 12
+    },
+    "Yemenite": {
+      "references": [
+        "I Kings 2:1\u201312"
+      ],
+      "total_length": 12
+    },
+    "Karaite": {
+      "references": [
+        "II Kings 13:14\u201314:7"
+      ],
+      "total_length": 19
+    },
+    "Romaniote": {
+      "references": [
+        "II Kings 13:14\u201314:7"
+      ],
+      "total_length": 19
+    }
+  },
+  "Shemot": {
+    "Ashkenazi": {
+      "references": [
+        "Isaiah 27:6\u201328:13",
+        "Isaiah 29:22\u201323"
+      ],
+      "total_length": 23
+    },
+    "Sephardi": {
+      "references": [
+        "Jeremiah 1:1\u20132:3"
+      ],
+      "total_length": 22
+    },
+    "Yemenite": {
+      "references": [
+        "Ezekiel 16:1\u201314"
+      ],
+      "total_length": 14
+    },
+    "Italian": {
+      "references": [
+        "Jeremiah 1:1\u20132:3"
+      ],
+      "total_length": 22
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 27:6\u201328:13"
+      ],
+      "total_length": 21
+    }
+  },
+  "Va'eira": {
+    "Ashkenazi": {
+      "references": [
+        "Ezekiel 28:25\u201329:21"
+      ],
+      "total_length": 23
+    },
+    "Sephardi": {
+      "references": [
+        "Ezekiel 28:25\u201329:21"
+      ],
+      "total_length": 23
+    },
+    "Yemenite": {
+      "references": [
+        "Ezekiel 28:24\u201329:21"
+      ],
+      "total_length": 24
+    },
+    "Italian": {
+      "references": [
+        "Ezekiel 28:24\u201329:21"
+      ],
+      "total_length": 24
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 42:8\u201343:5"
+      ],
+      "total_length": 23
+    }
+  },
+  "Bo": {
+    "Ashkenazi": {
+      "references": [
+        "Jeremiah 46:13\u201328"
+      ],
+      "total_length": 16
+    },
+    "Sephardi": {
+      "references": [
+        "Isaiah 19:1\u201325"
+      ],
+      "total_length": 25
+    },
+    "Yemenite": {
+      "references": [
+        "Isaiah 18:7\u201319:25"
+      ],
+      "total_length": 26
+    },
+    "Italian": {
+      "references": [
+        "Isaiah 18:7\u201319:25"
+      ],
+      "total_length": 26
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 34:11\u201335:10"
+      ],
+      "total_length": 17
+    },
+    "Romaniote": {
+      "references": [
+        "Isaiah 34:11\u201336:4"
+      ],
+      "total_length": 21
+    }
+  },
+  "Beshalach": {
+    "Ashkenazi": {
+      "references": [
+        "Judges 4:4\u20135:31"
+      ],
+      "total_length": 52
+    },
+    "Sephardi": {
+      "references": [
+        "Judges 5:1\u201331"
+      ],
+      "total_length": 31
+    },
+    "Yemenite": {
+      "references": [
+        "Judges 4:23\u20135:31"
+      ],
+      "total_length": 33
+    },
+    "Italian": {
+      "references": [
+        "Judges 4:4\u20135:3"
+      ],
+      "total_length": 24
+    },
+    "Karaite": {
+      "references": [
+        "Joshua 24:7\u201324:26"
+      ],
+      "total_length": 20
+    }
+  },
+  "Yitro": {
+    "Ashkenazi": {
+      "references": [
+        "Isaiah 6:1\u20137:6",
+        "Isaiah 9:5\u20136"
+      ],
+      "total_length": 21
+    },
+    "Sephardi": {
+      "references": [
+        "Isaiah 6:1\u201313"
+      ],
+      "total_length": 13
+    },
+    "Yemenite": {
+      "references": [
+        "Isaiah 6:1\u20136:13",
+        "Isaiah 9:5\u20136"
+      ],
+      "total_length": 15
+    },
+    "Italian": {
+      "references": [
+        "Isaiah 6:1\u201313"
+      ],
+      "total_length": 13
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 33:13\u201334:8"
+      ],
+      "total_length": 20
+    },
+    "Romaniote": {
+      "references": [
+        "Isaiah 33:13\u201334:10"
+      ],
+      "total_length": 22
+    }
+  },
+  "Mishpatim": {
+    "Ashkenazi": {
+      "references": [
+        "Jeremiah 34:8\u201322",
+        "Jeremiah 33:25\u201326"
+      ],
+      "total_length": 17
+    },
+    "Sephardi": {
+      "references": [
+        "Jeremiah 34:8\u201322",
+        "Jeremiah 33:25\u201326"
+      ],
+      "total_length": 17
+    },
+    "Yemenite": {
+      "references": [
+        "Jeremiah 34:8\u201335:19"
+      ],
+      "total_length": 34
+    },
+    "Italian": {
+      "references": [
+        "Jeremiah 34:8\u201335:11"
+      ],
+      "total_length": 26
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 56:1\u201357:2"
+      ],
+      "total_length": 14
+    },
+    "Romaniote": {
+      "references": [
+        "Isaiah 56:1\u201357:10"
+      ],
+      "total_length": 22
+    }
+  },
+  "Terumah": {
+    "Ashkenazi": {
+      "references": [
+        "I Kings 5:26\u20136:13"
+      ],
+      "total_length": 20
+    },
+    "Sephardi": {
+      "references": [
+        "I Kings 5:26\u20136:13"
+      ],
+      "total_length": 20
+    },
+    "Yemenite": {
+      "references": [
+        "I Kings 5:26\u20136:13"
+      ],
+      "total_length": 20
+    },
+    "Italian": {
+      "references": [
+        "I Kings 5:26\u20136:13"
+      ],
+      "total_length": 20
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 60:17\u201361:9"
+      ],
+      "total_length": 15
+    },
+    "Romaniote": {
+      "references": [
+        "Isaiah 60:17\u201362:3"
+      ],
+      "total_length": 20
+    }
+  },
+  "Tetzaveh": {
+    "Ashkenazi": {
+      "references": [
+        "Ezekiel 43:10\u201327"
+      ],
+      "total_length": 18
+    },
+    "Sephardi": {
+      "references": [
+        "Ezekiel 43:10\u201327"
+      ],
+      "total_length": 18
+    },
+    "Yemenite": {
+      "references": [
+        "Ezekiel 43:10\u201327"
+      ],
+      "total_length": 18
+    },
+    "Italian": {
+      "references": [
+        "Ezekiel 43:10\u201327"
+      ],
+      "total_length": 18
+    },
+    "Karaite": {
+      "references": [
+        "Jeremiah 11:16\u201312:15"
+      ],
+      "total_length": 23
+    }
+  },
+  "Ki Tissa": {
+    "Ashkenazi": {
+      "references": [
+        "I Kings 18:1\u201339"
+      ],
+      "total_length": 39
+    },
+    "Sephardi": {
+      "references": [
+        "I Kings 18:20\u201339"
+      ],
+      "total_length": 20
+    },
+    "Yemenite": {
+      "references": [
+        "I Kings 18:1\u201346"
+      ],
+      "total_length": 46
+    },
+    "Italian": {
+      "references": [
+        "I Kings 18:1\u201338"
+      ],
+      "total_length": 38
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 43:7\u201344:5"
+      ],
+      "total_length": 27
+    },
+    "Romaniote": {
+      "references": [
+        "Isaiah 43:7\u201344:2"
+      ],
+      "total_length": 24
+    }
+  },
+  "Vayakhel": {
+    "Ashkenazi": {
+      "references": [
+        "I Kings 7:40\u201350"
+      ],
+      "total_length": 11
+    },
+    "Sephardi": {
+      "references": [
+        "I Kings 7:13\u201326"
+      ],
+      "total_length": 14
+    },
+    "Yemenite": {
+      "references": [
+        "I Kings 7:13\u201322"
+      ],
+      "total_length": 10
+    },
+    "Italian": {
+      "references": [
+        "I Kings 7:13\u201326"
+      ],
+      "total_length": 14
+    },
+    "Karaite": {
+      "references": [
+        "I Kings 8:1\u20138:19"
+      ],
+      "total_length": 19
+    },
+    "Romaniote": {
+      "references": [
+        "I Kings 8:1\u20138:10"
+      ],
+      "total_length": 10
+    }
+  },
+  "Pekudei": {
+    "Ashkenazi": {
+      "references": [
+        "I Kings 7:51\u20138:21"
+      ],
+      "total_length": 22
+    },
+    "Sephardi": {
+      "references": [
+        "I Kings 7:40\u201350"
+      ],
+      "total_length": 11
+    },
+    "Yemenite": {
+      "references": [
+        "I Kings 7:40\u201350"
+      ],
+      "total_length": 11
+    },
+    "Italian": {
+      "references": [
+        "I Kings 7:40\u201351"
+      ],
+      "total_length": 12
+    },
+    "Karaite": {
+      "references": [
+        "Jeremiah 30:18\u201331:13"
+      ],
+      "total_length": 20
+    },
+    "Romaniote": {
+      "references": [
+        "I Kings 7:27\u201347"
+      ],
+      "total_length": 21
+    }
+  },
+  "Vayikra": {
+    "Ashkenazi": {
+      "references": [
+        "Isaiah 43:21\u201344:23"
+      ],
+      "total_length": 31
+    },
+    "Sephardi": {
+      "references": [
+        "Isaiah 43:21\u201344:6"
+      ],
+      "total_length": 14
+    },
+    "Yemenite": {
+      "references": [
+        "Isaiah 43:21\u201344:6"
+      ],
+      "total_length": 14
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 43:21\u201344:23"
+      ],
+      "total_length": 31
+    },
+    "Romaniote": {
+      "references": [
+        "Isaiah 43:21\u201344:13"
+      ],
+      "total_length": 21
+    }
+  },
+  "Tzav": {
+    "Ashkenazi": {
+      "references": [
+        "Jeremiah 7:21\u20138:3",
+        "Jeremiah 9:22\u201323"
+      ],
+      "total_length": 19
+    },
+    "Sephardi": {
+      "references": [
+        "Jeremiah 7:21\u20138:3",
+        "Jeremiah 9:22\u201323"
+      ],
+      "total_length": 19
+    },
+    "Yemenite": {
+      "references": [
+        "Jeremiah 7:21\u201328",
+        "Jeremiah 9:22\u201323"
+      ],
+      "total_length": 10
+    },
+    "Karaite": {
+      "references": [
+        "Malachi 3:4\u201324",
+        "Malachi 3:23"
+      ],
+      "total_length": 22
+    },
+    "Romaniote": {
+      "references": [
+        "Malachi 3:4\u20133:24"
+      ],
+      "total_length": 21
+    }
+  },
+  "Shemini": {
+    "Ashkenazi": {
+      "references": [
+        "II Samuel 6:1\u20137:17"
+      ],
+      "total_length": 40
+    },
+    "Sephardi": {
+      "references": [
+        "II Samuel 6:1\u201319"
+      ],
+      "total_length": 19
+    },
+    "Yemenite": {
+      "references": [
+        "II Samuel 6:1\u20137:3"
+      ],
+      "total_length": 26
+    },
+    "Karaite": {
+      "references": [
+        "Ezekiel 43:27\u201344:16"
+      ],
+      "total_length": 17
+    },
+    "Romaniote": {
+      "references": [
+        "Ezekiel 43:27\u201344:21"
+      ],
+      "total_length": 22
+    }
+  },
+  "Tazria": {
+    "Ashkenazi": {
+      "references": [
+        "II Kings 4:42\u20135:19"
+      ],
+      "total_length": 22
+    },
+    "Sephardi": {
+      "references": [
+        "II Kings 4:42\u20135:19"
+      ],
+      "total_length": 22
+    },
+    "Yemenite": {
+      "references": [
+        "II Kings 4:42\u20135:19"
+      ],
+      "total_length": 22
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 66:7\u201366:24",
+        "Isaiah 66:23"
+      ],
+      "total_length": 19
+    },
+    "Romaniote": {
+      "references": [
+        "Isaiah 66:7\u201366:24"
+      ],
+      "total_length": 18
+    }
+  },
+  "Metzora": {
+    "Ashkenazi": {
+      "references": [
+        "II Kings 7:3\u201320"
+      ],
+      "total_length": 18
+    },
+    "Sephardi": {
+      "references": [
+        "II Kings 7:3\u201320"
+      ],
+      "total_length": 18
+    },
+    "Yemenite": {
+      "references": [
+        "II Kings 7:1\u201320",
+        "II Kings 13:23"
+      ],
+      "total_length": 21
+    },
+    "Karaite": {
+      "references": [
+        "II Kings 7:3\u201318"
+      ],
+      "total_length": 16
+    }
+  },
+  "Acharei Mot": {
+    "Ashkenazi": {
+      "references": [
+        "Amos 9:7\u201315"
+      ],
+      "total_length": 9
+    },
+    "Sephardi": {
+      "references": [
+        "Ezekiel 22:1\u201316"
+      ],
+      "total_length": 16
+    },
+    "Yemenite": {
+      "references": [
+        "Ezekiel 22:1\u201316"
+      ],
+      "total_length": 16
+    },
+    "Romaniote": {
+      "references": [
+        "Ezekiel 22:1\u201320"
+      ],
+      "total_length": 20
+    }
+  },
+  "Kedoshim": {
+    "Ashkenazi": {
+      "references": [
+        "Amos 9:7\u201315"
+      ],
+      "total_length": 9
+    },
+    "Sephardi": {
+      "references": [
+        "Ezekiel 20:2\u201320"
+      ],
+      "total_length": 19
+    },
+    "Yemenite": {
+      "references": [
+        "Ezekiel 20:1\u201320"
+      ],
+      "total_length": 20
+    },
+    "Italian": {
+      "references": [
+        "Ezekiel 34:1\u201315"
+      ],
+      "total_length": 15
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 4:3\u20135:16"
+      ],
+      "total_length": 20
+    },
+    "Romaniote": {
+      "references": [
+        "Isaiah 3:4\u20135:17"
+      ],
+      "total_length": 46
+    }
+  },
+  "Emor": {
+    "Ashkenazi": {
+      "references": [
+        "Ezekiel 44:15\u201331"
+      ],
+      "total_length": 17
+    },
+    "Sephardi": {
+      "references": [
+        "Ezekiel 44:15\u201331"
+      ],
+      "total_length": 17
+    },
+    "Yemenite": {
+      "references": [
+        "Ezekiel 44:15\u201331"
+      ],
+      "total_length": 17
+    },
+    "Karaite": {
+      "references": [
+        "Ezekiel 44:25\u201345:11"
+      ],
+      "total_length": 18
+    },
+    "Romaniote": {
+      "references": [
+        "Ezekiel 44:15\u201331"
+      ],
+      "total_length": 17
+    }
+  },
+  "Behar": {
+    "Ashkenazi": {
+      "references": [
+        "Jeremiah 32:6\u201327"
+      ],
+      "total_length": 22
+    },
+    "Sephardi": {
+      "references": [
+        "Jeremiah 32:6\u201327"
+      ],
+      "total_length": 22
+    },
+    "Yemenite": {
+      "references": [
+        "Jeremiah 16:19\u201317:14"
+      ],
+      "total_length": 17
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 24:2\u201323"
+      ],
+      "total_length": 22
+    }
+  },
+  "Bechukotai": {
+    "Ashkenazi": {
+      "references": [
+        "Jeremiah 16:19\u201317:14"
+      ],
+      "total_length": 17
+    },
+    "Sephardi": {
+      "references": [
+        "Jeremiah 16:19\u201317:14"
+      ],
+      "total_length": 17
+    },
+    "Yemenite": {
+      "references": [
+        "Ezekiel 34:1\u201327"
+      ],
+      "total_length": 27
+    },
+    "Italian": {
+      "references": [
+        "Ezekiel 34:1\u201315"
+      ],
+      "total_length": 15
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 1:19\u20132:11"
+      ],
+      "total_length": 24
+    },
+    "Romaniote": {
+      "references": [
+        "Isaiah 1:19\u20132:11"
+      ],
+      "total_length": 24
+    }
+  },
+  "Bemidbar": {
+    "Ashkenazi": {
+      "references": [
+        "Hosea 2:1\u201322"
+      ],
+      "total_length": 22
+    },
+    "Sephardi": {
+      "references": [
+        "Hosea 2:1\u201322"
+      ],
+      "total_length": 22
+    },
+    "Yemenite": {
+      "references": [
+        "Hosea 2:1\u201322"
+      ],
+      "total_length": 22
+    }
+  },
+  "Naso": {
+    "Ashkenazi": {
+      "references": [
+        "Judges 13:2\u201325"
+      ],
+      "total_length": 24
+    },
+    "Sephardi": {
+      "references": [
+        "Judges 13:2\u201325"
+      ],
+      "total_length": 24
+    },
+    "Yemenite": {
+      "references": [
+        "Judges 13:2\u201325"
+      ],
+      "total_length": 24
+    },
+    "Karaite": {
+      "references": [
+        "Judges 13:2\u201324"
+      ],
+      "total_length": 23
+    },
+    "Romaniote": {
+      "references": [
+        "Hosea 4:14\u20136:2"
+      ],
+      "total_length": 23
+    }
+  },
+  "Behaalotecha": {
+    "Ashkenazi": {
+      "references": [
+        "Zechariah 2:14\u20134:7"
+      ],
+      "total_length": 21
+    },
+    "Sephardi": {
+      "references": [
+        "Zechariah 2:14\u20134:7"
+      ],
+      "total_length": 21
+    },
+    "Yemenite": {
+      "references": [
+        "Zechariah 2:14\u20134:9"
+      ],
+      "total_length": 23
+    },
+    "Karaite": {
+      "references": [
+        "Zechariah 2:14\u20134:7"
+      ],
+      "total_length": 21
+    }
+  },
+  "Sh'lach": {
+    "Ashkenazi": {
+      "references": [
+        "Joshua 2:1\u201324"
+      ],
+      "total_length": 24
+    },
+    "Sephardi": {
+      "references": [
+        "Joshua 2:1\u201324"
+      ],
+      "total_length": 24
+    },
+    "Yemenite": {
+      "references": [
+        "Joshua 2:1\u201324"
+      ],
+      "total_length": 24
+    },
+    "Romaniote": {
+      "references": [
+        "Joshua 2:1\u201321"
+      ],
+      "total_length": 21
+    },
+    "Karaite": {
+      "references": [
+        "Joshua 2:1\u201315"
+      ],
+      "total_length": 15
+    }
+  },
+  "Korach": {
+    "Ashkenazi": {
+      "references": [
+        "I Samuel 11:14\u201312:22"
+      ],
+      "total_length": 24
+    },
+    "Sephardi": {
+      "references": [
+        "I Samuel 11:14\u201312:22"
+      ],
+      "total_length": 24
+    },
+    "Yemenite": {
+      "references": [
+        "I Samuel 11:14\u201312:22"
+      ],
+      "total_length": 24
+    },
+    "Romaniote": {
+      "references": [
+        "Hosea 10:2\u201311:8"
+      ],
+      "total_length": 22
+    },
+    "Karaite": {
+      "references": [
+        "Hosea 10:2\u201311:9"
+      ],
+      "total_length": 23
+    }
+  },
+  "Chukat": {
+    "Ashkenazi": {
+      "references": [
+        "Judges 11:1\u201333"
+      ],
+      "total_length": 33
+    },
+    "Sephardi": {
+      "references": [
+        "Judges 11:1\u201333"
+      ],
+      "total_length": 33
+    },
+    "Yemenite": {
+      "references": [
+        "Judges 11:1\u201340"
+      ],
+      "total_length": 40
+    },
+    "Romaniote": {
+      "references": [
+        "Judges 11:1\u201321"
+      ],
+      "total_length": 21
+    },
+    "Karaite": {
+      "references": [
+        "Judges 11:1\u201317"
+      ],
+      "total_length": 17
+    }
+  },
+  "Balak": {
+    "Ashkenazi": {
+      "references": [
+        "Micah 5:6\u20136:8"
+      ],
+      "total_length": 17
+    },
+    "Sephardi": {
+      "references": [
+        "Micah 5:6\u20136:8"
+      ],
+      "total_length": 17
+    },
+    "Yemenite": {
+      "references": [
+        "Micah 5:6\u20136:8"
+      ],
+      "total_length": 17
+    },
+    "Italian": {
+      "references": [
+        "Micah 5:4\u20136:8"
+      ],
+      "total_length": 19
+    },
+    "Karaite": {
+      "references": [
+        "Micah 5:6\u20136:8"
+      ],
+      "total_length": 17
+    }
+  },
+  "Pinchas": {
+    "Ashkenazi": {
+      "references": [
+        "I Kings 18:46\u201319:21"
+      ],
+      "total_length": 22
+    },
+    "Sephardi": {
+      "references": [
+        "I Kings 18:46\u201319:21"
+      ],
+      "total_length": 22
+    },
+    "Yemenite": {
+      "references": [
+        "I Kings 18:46\u201319:21"
+      ],
+      "total_length": 22
+    },
+    "Karaite": {
+      "references": [
+        "Malachi 2:5\u20133:3"
+      ],
+      "total_length": 16
+    }
+  },
+  "Matot": {
+    "Ashkenazi": {
+      "references": [
+        "Jeremiah 1:1\u20132:3"
+      ],
+      "total_length": 22
+    },
+    "Sephardi": {
+      "references": [
+        "Jeremiah 1:1\u20132:3"
+      ],
+      "total_length": 22
+    },
+    "Yemenite": {
+      "references": [
+        "Jeremiah 1:1\u20132:3"
+      ],
+      "total_length": 22
+    },
+    "Italian": {
+      "references": [
+        "Joshua 13:15\u201333"
+      ],
+      "total_length": 19
+    },
+    "Karaite": {
+      "references": [
+        "Jeremiah 1:1\u20132:3"
+      ],
+      "total_length": 22
+    }
+  },
+  "Masei": {
+    "Ashkenazi": {
+      "references": [
+        "Jeremiah 2:4\u201328",
+        "Jeremiah 3:4"
+      ],
+      "total_length": 26
+    },
+    "Sephardi": {
+      "references": [
+        "Jeremiah 2:4\u201328",
+        "Jeremiah 4:1\u20132"
+      ],
+      "total_length": 27
+    },
+    "Yemenite": {
+      "references": [
+        "Jeremiah 1:1\u201319"
+      ],
+      "total_length": 19
+    },
+    "Italian": {
+      "references": [
+        "Joshua 19:51\u201321:3"
+      ],
+      "total_length": 13
+    },
+    "Karaite": {
+      "references": [
+        "Joshua 20:1\u20139"
+      ],
+      "total_length": 9
+    }
+  },
+  "Devarim": {
+    "Ashkenazi": {
+      "references": [
+        "Isaiah 1:1\u201327"
+      ],
+      "total_length": 27
+    },
+    "Sephardi": {
+      "references": [
+        "Isaiah 1:1\u201327"
+      ],
+      "total_length": 27
+    },
+    "Yemenite": {
+      "references": [
+        "Isaiah 1:21\u201331"
+      ],
+      "total_length": 11
+    },
+    "Italian": {
+      "references": [
+        "Isaiah 1:1\u201327"
+      ],
+      "total_length": 27
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 1:1\u201327"
+      ],
+      "total_length": 27
+    }
+  },
+  "Va'etchanan": {
+    "Ashkenazi": {
+      "references": [
+        "Isaiah 40:1\u201326"
+      ],
+      "total_length": 26
+    },
+    "Sephardi": {
+      "references": [
+        "Isaiah 40:1\u201326"
+      ],
+      "total_length": 26
+    },
+    "Yemenite": {
+      "references": [
+        "Isaiah 40:1\u201327",
+        "Isaiah 41:17"
+      ],
+      "total_length": 28
+    },
+    "Italian": {
+      "references": [
+        "Isaiah 40:1\u201315"
+      ],
+      "total_length": 15
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 40:1\u201322"
+      ],
+      "total_length": 22
+    }
+  },
+  "Eikev": {
+    "Ashkenazi": {
+      "references": [
+        "Isaiah 49:14\u201351:3"
+      ],
+      "total_length": 27
+    },
+    "Sephardi": {
+      "references": [
+        "Isaiah 49:14\u201351:3"
+      ],
+      "total_length": 27
+    },
+    "Yemenite": {
+      "references": [
+        "Isaiah 49:14\u201351:3"
+      ],
+      "total_length": 27
+    },
+    "Romaniote": {
+      "references": [
+        "Isaiah 49:1\u201351:3"
+      ],
+      "total_length": 40
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 49:14\u201350:5"
+      ],
+      "total_length": 18
+    }
+  },
+  "Re'eh": {
+    "Ashkenazi": {
+      "references": [
+        "Isaiah 54:11\u201355:5"
+      ],
+      "total_length": 12
+    },
+    "Sephardi": {
+      "references": [
+        "Isaiah 54:11\u201355:5"
+      ],
+      "total_length": 12
+    },
+    "Yemenite": {
+      "references": [
+        "Isaiah 54:11\u201355:5"
+      ],
+      "total_length": 12
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 54:11\u201356:1"
+      ],
+      "total_length": 21
+    }
+  },
+  "Shoftim": {
+    "Ashkenazi": {
+      "references": [
+        "Isaiah 51:12\u201352:12"
+      ],
+      "total_length": 24
+    },
+    "Sephardi": {
+      "references": [
+        "Isaiah 51:12\u201352:12"
+      ],
+      "total_length": 24
+    },
+    "Yemenite": {
+      "references": [
+        "Isaiah 51:12\u201352:12"
+      ],
+      "total_length": 24
+    },
+    "Italian": {
+      "references": [
+        "I Samuel 8:1\u201322"
+      ],
+      "total_length": 22
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 51:12\u201352:8"
+      ],
+      "total_length": 20
+    }
+  },
+  "Ki Teitzei": {
+    "Ashkenazi": {
+      "references": [
+        "Isaiah 54:1\u201310"
+      ],
+      "total_length": 10
+    },
+    "Sephardi": {
+      "references": [
+        "Isaiah 54:1\u201310"
+      ],
+      "total_length": 10
+    },
+    "Yemenite": {
+      "references": [
+        "Isaiah 54:1\u201310"
+      ],
+      "total_length": 10
+    },
+    "Italian": {
+      "references": [
+        "I Samuel 17:1\u201337"
+      ],
+      "total_length": 37
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 54:1\u201317"
+      ],
+      "total_length": 17
+    }
+  },
+  "Ki Tavo": {
+    "Ashkenazi": {
+      "references": [
+        "Isaiah 60:1\u201322"
+      ],
+      "total_length": 22
+    },
+    "Sephardi": {
+      "references": [
+        "Isaiah 60:1\u201322"
+      ],
+      "total_length": 22
+    },
+    "Yemenite": {
+      "references": [
+        "Isaiah 60:1\u201322"
+      ],
+      "total_length": 22
+    },
+    "Italian": {
+      "references": [
+        "Joshua 8:30\u20139:27"
+      ],
+      "total_length": 33
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 60:1\u201316"
+      ],
+      "total_length": 16
+    }
+  },
+  "Nitzavim": {
+    "Ashkenazi": {
+      "references": [
+        "Isaiah 61:10\u201363:9"
+      ],
+      "total_length": 23
+    },
+    "Sephardi": {
+      "references": [
+        "Isaiah 61:10\u201363:9"
+      ],
+      "total_length": 23
+    },
+    "Yemenite": {
+      "references": [
+        "Isaiah 61:9\u201363:9"
+      ],
+      "total_length": 24
+    },
+    "Italian": {
+      "references": [
+        "Joshua 24:1\u201318"
+      ],
+      "total_length": 18
+    },
+    "Karaite": {
+      "references": [
+        "Isaiah 61:10\u201363:1"
+      ],
+      "total_length": 15
+    }
+  },
+  "Vayelech": {
+    "Ashkenazi": {
+      "references": [
+        "Isaiah 55:6\u201356:8"
+      ],
+      "total_length": 16
+    },
+    "Sephardi": {
+      "references": [
+        "Isaiah 55:6\u201356:8"
+      ],
+      "total_length": 16
+    },
+    "Yemenite": {
+      "references": [
+        "Isaiah 55:6\u201356:8"
+      ],
+      "total_length": 16
+    },
+    "Italian": {
+      "references": [
+        "Isaiah 55:6\u201356:8"
+      ],
+      "total_length": 16
+    }
+  },
+  "Ha'azinu": {
+    "Ashkenazi": {
+      "references": [
+        "II Samuel 22:1\u201351"
+      ],
+      "total_length": 51
+    },
+    "Sephardi": {
+      "references": [
+        "II Samuel 22:1\u201351"
+      ],
+      "total_length": 51
+    },
+    "Yemenite": {
+      "references": [
+        "Ezekiel 17:22\u201318:32"
+      ],
+      "total_length": 35
+    },
+    "Karaite": {
+      "references": [
+        "Hosea 14:2\u201310"
+      ],
+      "total_length": 9
+    }
+  },
+  "V'Zot HaBerachah": {
+    "Ashkenazi": {
+      "references": [
+        "Joshua 1:1\u201318"
+      ],
+      "total_length": 18
+    },
+    "Sephardi": {
+      "references": [
+        "Joshua 1:1\u20139"
+      ],
+      "total_length": 9
+    },
+    "Yemenite": {
+      "references": [
+        "Joshua 1:1\u20139",
+        "Joshua 6:27"
+      ],
+      "total_length": 10
+    },
+    "Karaite": {
+      "references": [
+        "Joshua 1:1\u201310"
+      ],
+      "total_length": 10
+    },
+    "Romaniote": {
+      "references": [
+        "I Kings 9:22\u201334"
+      ],
+      "total_length": 7
+    }
+  }
+}
