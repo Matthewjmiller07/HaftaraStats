@@ -212,5 +212,60 @@ document.querySelectorAll("#rite-selection input[type=checkbox]").forEach(checkb
   });
 });
 
+
+// Function to generate an ordered list of verses per book by rite
+function generateOrderedVerseList() {
+  const verseListDiv = document.getElementById('ordered-verse-list');
+  verseListDiv.innerHTML = ''; // Clear previous content
+
+  // Iterate over each rite and create a list
+  Array.from(activeRites).forEach(rite => {
+      // Create a section for each rite
+      const riteSection = document.createElement('div');
+      const riteHeading = document.createElement('h3');
+      riteHeading.textContent = `${rite} Rite`;
+      riteSection.appendChild(riteHeading);
+
+      // Sort books by the number of verses in descending order
+      const sortedBooks = bookOrder
+          .map(book => ({
+              book: book,
+              verses: bookVerseCountsByRite[rite][book] || 0
+          }))
+          .sort((a, b) => b.verses - a.verses);
+
+      // Create an ordered list
+      const ol = document.createElement('ol');
+      sortedBooks.forEach(({ book, verses }) => {
+          const li = document.createElement('li');
+          li.textContent = `${book}: ${verses} verses`;
+          ol.appendChild(li);
+      });
+
+      riteSection.appendChild(ol);
+      verseListDiv.appendChild(riteSection);
+  });
+}
+
+// Update the checkbox event listener to include the ordered list generation
+document.querySelectorAll("#rite-selection input[type=checkbox]").forEach(checkbox => {
+checkbox.addEventListener('change', (event) => {
+  const rite = event.target.value;
+  if (event.target.checked) {
+    activeRites.add(rite);
+  } else {
+    activeRites.delete(rite);
+  }
+  // Recreate the charts and table with the updated rites
+  createBookChart();
+  createLengthChart();
+  populatePercentageTable();
+  generateOrderedVerseList(); // Generate the ordered list
+});
+});
+
+// Ensure the ordered list is generated on page load
+loadHaftarahReadings().then(() => generateOrderedVerseList());
+
 // Load the Haftarah readings on page load
 loadHaftarahReadings();
