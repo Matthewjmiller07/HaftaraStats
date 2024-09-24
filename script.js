@@ -1,6 +1,6 @@
 // Define rites and global variables for storing data
 const rites = ["Ashkenazi", "Sephardi", "Yemenite", "Italian", "Karaite"];
-const bookOrder = [
+let bookOrder = [
   "Joshua", "Judges", "I Samuel", "II Samuel", "I Kings", "II Kings", 
   "Isaiah", "Jeremiah", "Ezekiel", "Hosea", "Joel", "Amos", 
   "Obadiah", "Jonah", "Micah", "Nahum", "Habakkuk", 
@@ -45,6 +45,7 @@ let haftarahData = {};
 let bookVerseCountsByRite = {};  // Store total verses for each book
 let riteLengths = {};
 let activeRites = new Set(rites);  // Track active rites
+let chartOrder = "default"; // Track chart order preference
 
 let bookChartInstance = null;  // To hold the Chart.js instance for the book chart
 let lengthChartInstance = null;  // To hold the Chart.js instance for the length chart
@@ -90,7 +91,7 @@ function processData() {
     });
   });
 
-  createBookChart();
+  toggleChartOrder();  // Initialize charts with the correct order
   createLengthChart();
   populatePercentageTable(); // Function to populate the percentage table
 }
@@ -99,6 +100,31 @@ function processData() {
 function getBookName(ref) {
   const match = ref.match(/([IV]*\s?[a-zA-Z]+)\s\d+:/);  // Captures Roman numerals too
   return match ? match[1].trim() : ref;
+}
+
+// Function to toggle the chart order
+function toggleChartOrder() {
+  if (chartOrder === "mostUsed") {
+    // Calculate total verses for all books across all active rites
+    const totalVersesByBook = {};
+    bookOrder.forEach(book => {
+      totalVersesByBook[book] = Array.from(activeRites).reduce((acc, rite) => acc + (bookVerseCountsByRite[rite][book] || 0), 0);
+    });
+    
+    // Order books by total number of verses across active rites
+    bookOrder = Object.keys(totalVersesByBook).sort((a, b) => totalVersesByBook[b] - totalVersesByBook[a]);
+  } else {
+    // Reset to default order
+    bookOrder = [
+      "Joshua", "Judges", "I Samuel", "II Samuel", "I Kings", "II Kings", 
+      "Isaiah", "Jeremiah", "Ezekiel", "Hosea", "Joel", "Amos", 
+      "Obadiah", "Jonah", "Micah", "Nahum", "Habakkuk", 
+      "Zephaniah", "Haggai", "Zechariah", "Malachi"
+    ];
+  }
+
+  createBookChart();
+  populatePercentageTable();
 }
 
 // Create the chart for book counts by rite (total number of verses per book)
@@ -206,12 +232,20 @@ document.querySelectorAll("#rite-selection input[type=checkbox]").forEach(checkb
       activeRites.delete(rite);
     }
     // Recreate the charts and table with the updated rites
-    createBookChart();
+    toggleChartOrder();  // Recalculate order based on new active rites
     createLengthChart();
     populatePercentageTable();
+    generateOrderedVerseList(); // Generate the ordered list
   });
 });
 
+// Event listener for chart order toggle
+document.querySelectorAll("#order-toggle input[type=radio]").forEach(radio => {
+  radio.addEventListener('change', (event) => {
+    chartOrder = event.target.value;
+    toggleChartOrder();  // Rebuild the charts with the new order
+  });
+});
 
 // Function to generate an ordered list of verses per book by rite
 function generateOrderedVerseList() {
@@ -220,49 +254,32 @@ function generateOrderedVerseList() {
 
   // Iterate over each rite and create a list
   Array.from(activeRites).forEach(rite => {
-      // Create a section for each rite
-      const riteSection = document.createElement('div');
-      const riteHeading = document.createElement('h3');
-      riteHeading.textContent = `${rite} Rite`;
-      riteSection.appendChild(riteHeading);
+    // Create a section for each rite
+    const riteSection = document.createElement('div');
+    const riteHeading = document.createElement('h3');
+    riteHeading.textContent = `${rite} Rite`;
+    riteSection.appendChild(riteHeading);
 
-      // Sort books by the number of verses in descending order
-      const sortedBooks = bookOrder
-          .map(book => ({
-              book: book,
-              verses: bookVerseCountsByRite[rite][book] || 0
-          }))
-          .sort((a, b) => b.verses - a.verses);
+    // Sort books by the number of verses in descending order
+    const sortedBooks = bookOrder
+      .map(book => ({
+        book: book,
+        verses: bookVerseCountsByRite[rite][book] || 0
+      }))
+      .sort((a, b) => b.verses - a.verses);
 
-      // Create an ordered list
-      const ol = document.createElement('ol');
-      sortedBooks.forEach(({ book, verses }) => {
-          const li = document.createElement('li');
-          li.textContent = `${book}: ${verses} verses`;
-          ol.appendChild(li);
-      });
+    // Create an ordered list
+    const ol = document.createElement('ol');
+    sortedBooks.forEach(({ book, verses }) => {
+      const li = document.createElement('li');
+      li.textContent = `${book}: ${verses} verses`;
+      ol.appendChild(li);
+    });
 
-      riteSection.appendChild(ol);
-      verseListDiv.appendChild(riteSection);
+    riteSection.appendChild(ol);
+    verseListDiv.appendChild(riteSection);
   });
 }
-
-// Update the checkbox event listener to include the ordered list generation
-document.querySelectorAll("#rite-selection input[type=checkbox]").forEach(checkbox => {
-checkbox.addEventListener('change', (event) => {
-  const rite = event.target.value;
-  if (event.target.checked) {
-    activeRites.add(rite);
-  } else {
-    activeRites.delete(rite);
-  }
-  // Recreate the charts and table with the updated rites
-  createBookChart();
-  createLengthChart();
-  populatePercentageTable();
-  generateOrderedVerseList(); // Generate the ordered list
-});
-});
 
 // Ensure the ordered list is generated on page load
 loadHaftarahReadings().then(() => generateOrderedVerseList());
