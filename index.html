@@ -18,6 +18,7 @@
     <label><input type="checkbox" value="Yemenite" checked> Yemenite</label>
     <label><input type="checkbox" value="Italian" checked> Italian</label>
     <label><input type="checkbox" value="Karaite" checked> Karaite</label>
+    <label><input type="checkbox" value="Romaniote" checked> Romaniote</label>
   </div>
 
   <!-- Chart Order Toggle -->
@@ -27,7 +28,10 @@
   </div>
 
   <!-- Canvas elements for charts -->
+  <h2>Verse Count per Book by Rite</h2>
   <canvas id="bookChart" width="800" height="400"></canvas>
+
+  <h2>Total Length of Readings by Rite</h2>
   <canvas id="lengthChart" width="800" height="400"></canvas>
 
   <!-- Table for percentage data -->
@@ -49,6 +53,20 @@
   <!-- Ordered list of verses per book per rite -->
   <h2>Ordered List of Verses per Book by Rite</h2>
   <div id="ordered-verse-list"></div>
+
+  <!-- Overlap section -->
+  <h2>Overlapping Verses by Rite</h2>
+  <div id="overlap-section">
+    <p>Select a rite to see overlapping verses in the Haftarah readings.</p>
+    <select id="overlap-rite-select">
+      <option value="Ashkenazi">Ashkenazi</option>
+      <option value="Sephardi">Sephardi</option>
+      <option value="Yemenite">Yemenite</option>
+      <option value="Italian">Italian</option>
+      <option value="Karaite">Karaite</option>
+    </select>
+    <ul id="overlap-list"></ul>
+  </div>
 
   <!-- Include the JavaScript file -->
   <script src="script.js"></script>
