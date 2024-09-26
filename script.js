@@ -328,7 +328,8 @@ function createBookChart() {
 }
 
 // Create the total length chart with correct stacking
-function createLengthChart() {
+// Create the total length chart with correct stacking
+function createLengthChart(selectedParsha = null) {
   const ctx = document.getElementById('lengthChart').getContext('2d');
 
   if (lengthChartInstance) {
@@ -338,10 +339,20 @@ function createLengthChart() {
   const datasets = [];
 
   Array.from(activeRites).forEach(rite => {
-    // Calculate total length directly from the JSON data
-    const totalLength = Object.keys(haftarahData)
-      .reduce((sum, parsha) => 
-        sum + (haftarahData[parsha][rite]?.total_length || 0), 0);
+    let totalLength = 0;
+
+    // Calculate total length for the selected parsha or all parshiot if none is selected
+    if (selectedParsha) {
+      totalLength = haftarahData[selectedParsha][rite]?.total_length || 0;
+    } else {
+      // Sum all total lengths across all parshiot
+      totalLength = Object.keys(haftarahData).reduce((sum, parsha) => {
+        return sum + (haftarahData[parsha][rite]?.total_length || 0);
+      }, 0);
+    }
+
+    // Add logging to debug total length calculations
+    console.log(`Total length for ${rite}${selectedParsha ? ` in ${selectedParsha}` : ''}: ${totalLength}`);
 
     datasets.push({
       label: rite,
@@ -515,7 +526,7 @@ function filterChartsByParsha(parsha) {
 
   rites.forEach(rite => {
     bookVerseCountsByRite[rite] = {};
-    riteLengths[rite] = [];
+    riteLengths[rite] = 0;  // Initialize as zero to store the total length
     uniqueVersesByRiteAndBook[rite] = {}; 
   });
 
@@ -557,13 +568,14 @@ function filterChartsByParsha(parsha) {
         uniqueVersesByRiteAndBook[rite][book].add(verse);
       });
 
-      riteLengths[rite].push(verses.length);
+      // Update the total length for the rite for the selected parsha
+      riteLengths[rite] += readingData.total_length || 0;
     }
   });
 
   // Recreate charts and tables based on the filtered data
   toggleChartOrder();
-  createLengthChart();
+  createLengthChart();  // Ensure the chart is recreated with filtered data
   populatePercentageTable();
 }
 
@@ -642,16 +654,10 @@ async function generateWeeklyReadings(selectedParsha) {
       let currentChapter = startChapter;
       let verseIndex = startVerse;
 
-      // Create a container for each rite
-      const riteContainer = document.createElement('div');
-      riteContainer.classList.add('rite-container');
+      // Collect all verses in an array for sorting
+      const versesWithIndices = [];
 
-      // Add rite title and main reference
-      const riteTitle = document.createElement('h3');
-      riteTitle.textContent = `${rite} Rite - ${reference.replace('_', ' ')}`;
-      riteContainer.appendChild(riteTitle);
-
-      // Map each verse to its associated rite and add to the container
+      // Iterate over the chapters and verses
       hebrewVerses.forEach((chapterVerses, chapterOffset) => {
         if (Array.isArray(chapterVerses)) {
           currentChapter = startChapter + chapterOffset;
@@ -660,23 +666,50 @@ async function generateWeeklyReadings(selectedParsha) {
           }
 
           chapterVerses.forEach((text, index) => {
-            const verseKey = `${currentChapter}:${verseIndex + index}`;
-            addVerseToMap(verseKey, text, rite, verseRiteMap);
+            versesWithIndices.push({
+              chapter: currentChapter,
+              verse: verseIndex + index,
+              text,
+              rite,
+            });
           });
         } else {
-          const verseKey = `${currentChapter}:${verseIndex}`;
-          addVerseToMap(verseKey, chapterVerses, rite, verseRiteMap);
+          versesWithIndices.push({
+            chapter: currentChapter,
+            verse: verseIndex,
+            text: chapterVerses,
+            rite,
+          });
           verseIndex += 1;
         }
       });
 
       // Append the rite container to the parsha container
+      const riteContainer = document.createElement('div');
+      riteContainer.classList.add('rite-container');
+      const riteTitle = document.createElement('h3');
+      riteTitle.textContent = `${rite} Rite - ${reference.replace('_', ' ')}`;
+      riteContainer.appendChild(riteTitle);
       parshaContainer.appendChild(riteContainer);
+
+      // Map each verse to its associated rite
+      versesWithIndices.forEach(({ chapter, verse, text }) => {
+        const verseKey = `${chapter}:${verse}`;
+        addVerseToMap(verseKey, text, rite, verseRiteMap);
+      });
     }
   }
 
-  // Display verses and apply highlights based on the rites sharing them
-  for (const [verseKey, { rites, text }] of Object.entries(verseRiteMap)) {
+  // Sort verses by chapter and verse number
+  const sortedVerseKeys = Object.keys(verseRiteMap).sort((a, b) => {
+    const [aChapter, aVerse] = a.split(':').map(Number);
+    const [bChapter, bVerse] = b.split(':').map(Number);
+    return aChapter === bChapter ? aVerse - bVerse : aChapter - bChapter;
+  });
+
+  // Display sorted verses and apply highlights based on the rites sharing them
+  for (const verseKey of sortedVerseKeys) {
+    const { rites, text } = verseRiteMap[verseKey];
     const verseSpan = document.createElement('span');
     verseSpan.classList.add('verse-span');
     verseSpan.innerHTML = `<strong>${verseKey}</strong>: ${text}`;
