@@ -75,6 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // Filter charts and readings based on the selected parsha
       filterChartsByParsha(selectedParsha);
       await generateWeeklyReadings(selectedParsha);
+      createLengthChart(selectedParsha); // Update total length chart based on the selected parsha
+      populatePercentageTable(); // Ensure percentage table is updated
     } else {
       resetChartsAndReadings();
     }
@@ -91,11 +93,18 @@ document.addEventListener('DOMContentLoaded', () => {
         activeRites.delete(rite);
       }
 
-      // Regenerate weekly readings based on the current parsha and active rites
+      // Regenerate weekly readings and charts based on the current parsha and active rites
       const selectedParsha = parshaSelect.value;
       if (selectedParsha) {
         await generateWeeklyReadings(selectedParsha);
+        createLengthChart(selectedParsha); // Update total length chart based on the selected parsha and active rites
+      } else {
+        createLengthChart(); // If no parsha is selected, show data for all
       }
+
+      // Recreate other components like charts and tables
+      toggleChartOrder();
+      populatePercentageTable();
     });
   });
 
@@ -103,7 +112,16 @@ document.addEventListener('DOMContentLoaded', () => {
   loadHaftarahReadings().then(async () => {
     populateDropdown();
     await setDefaultParsha();
-    await generateWeeklyReadings(parshaSelect.value);
+
+    const selectedParsha = parshaSelect.value;
+    if (selectedParsha) {
+      await generateWeeklyReadings(selectedParsha);
+      createLengthChart(selectedParsha); // Make sure to create the length chart for the default parsha
+    } else {
+      createLengthChart(); // Create the length chart initially for all data
+    }
+
+    populatePercentageTable(); // Populate the percentage table initially
   });
 });
 
@@ -138,9 +156,9 @@ async function setDefaultParsha() {
         if (option.text === parshaName) {
           option.selected = true;
           found = true;
-
-          // Trigger the change event to load data for the selected parsha
-          parshaSelect.dispatchEvent(new Event('change'));
+          
+          // If parsha found, call `generateWeeklyReadings` directly without dispatching a change event
+          await generateWeeklyReadings(parshaName);
           break;
         }
       }
@@ -417,6 +435,7 @@ function createBookChart() {
 
 // Create the total length chart with correct stacking
 // Create the total length chart with correct stacking
+// Create the total length chart with correct stacking based on selected parsha
 function createLengthChart(selectedParsha = null) {
   const ctx = document.getElementById('lengthChart').getContext('2d');
 
@@ -426,6 +445,7 @@ function createLengthChart(selectedParsha = null) {
 
   const datasets = [];
 
+  // Iterate over only the currently active rites
   Array.from(activeRites).forEach(rite => {
     let totalLength = 0;
 
@@ -439,15 +459,15 @@ function createLengthChart(selectedParsha = null) {
       }, 0);
     }
 
-    // Add logging to debug total length calculations
-    console.log(`Total length for ${rite}${selectedParsha ? ` in ${selectedParsha}` : ''}: ${totalLength}`);
-
-    datasets.push({
-      label: rite,
-      data: [totalLength],
-      backgroundColor: riteColors[rite],
-      stack: rite
-    });
+    // Only add dataset if the total length is greater than 0 (optional, for cleaner charts)
+    if (totalLength > 0) {
+      datasets.push({
+        label: rite,
+        data: [totalLength],
+        backgroundColor: riteColors[rite],
+        stack: rite
+      });
+    }
   });
 
   lengthChartInstance = new Chart(ctx, {
@@ -595,11 +615,10 @@ parshaSelect.addEventListener('change', async () => {
   if (selectedParsha) {
     // Filter charts based on the selected parsha
     filterChartsByParsha(selectedParsha);
-    
-    // Generate the weekly readings section
     await generateWeeklyReadings(selectedParsha);
+    createLengthChart(selectedParsha); // Update total length chart based on the selected parsha
+    populatePercentageTable();
   } else {
-    // Clear charts and weekly readings if no selection
     resetChartsAndReadings();
   }
 });
@@ -668,13 +687,24 @@ function filterChartsByParsha(parsha) {
 
 // Reset charts and weekly readings when no parsha is selected
 function resetChartsAndReadings() {
-  weeklyReadingsContainer.innerHTML = ''; // Clear weekly readings
+  // Only clear the weekly readings container without processing data again
+  weeklyReadingsContainer.innerHTML = '';
 
-  // Reset data processing for all parshas
-  processData();
-  toggleChartOrder();
-  createLengthChart();
-  populatePercentageTable();
+  // Clear the length chart and other components without re-processing
+  if (lengthChartInstance) {
+    lengthChartInstance.destroy();
+    lengthChartInstance = null;
+  }
+
+  // Clear the book chart if necessary
+  if (bookChartInstance) {
+    bookChartInstance.destroy();
+    bookChartInstance = null;
+  }
+
+  // Clear the percentage table
+  const tbody = document.querySelector("#percentageTable tbody");
+  if (tbody) tbody.innerHTML = '';
 }
 
 // Populate the dropdown with available parshiot
