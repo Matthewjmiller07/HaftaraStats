@@ -52,6 +52,44 @@ let showOverlap = false;  // Track whether to show overlapping verses or not
 
 let bookChartInstance = null;  // To hold the Chart.js instance for the book chart
 let lengthChartInstance = null;  // To hold the Chart.js instance for the length chart
+let parshaSelect;
+let weeklyReadingsContainer;
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize these variables after the DOM is fully loaded
+  parshaSelect = document.getElementById('parsha-select');
+  weeklyReadingsContainer = document.getElementById('weekly-readings');
+
+  // Ensure elements are correctly found in the DOM
+  if (!parshaSelect || !weeklyReadingsContainer) {
+    console.error("Error: Elements with IDs 'parsha-select' or 'weekly-readings' are not found in the DOM.");
+    return; // Stop further execution if elements are missing
+  }
+
+  // Event listener for dropdown changes (add only if 'parshaSelect' is defined)
+  parshaSelect.addEventListener('change', async () => {
+    const selectedParsha = parshaSelect.value;
+
+    if (selectedParsha) {
+      // Filter charts based on the selected parsha
+      filterChartsByParsha(selectedParsha);
+
+      // Generate the weekly readings section
+      await generateWeeklyReadings(selectedParsha);
+    } else {
+      // Clear charts and weekly readings if no selection
+      resetChartsAndReadings();
+    }
+  });
+
+  // Ensure data is loaded and generate all required sections on page load
+  loadHaftarahReadings().then(() => {
+    generateOrderedVerseList();
+    generateWeeklyReadings();
+    populateDropdown();
+  });
+});
 
 // Load the updated JSON file with lengths and individual verses
 async function loadHaftarahReadings() {
@@ -450,9 +488,95 @@ function generateOrderedVerseList() {
 }
 
 
-// Initialize dropdown and weekly readings container
-const parshaSelect = document.getElementById('parsha-select');
-const weeklyReadingsContainer = document.getElementById('weekly-readings');
+
+// Listen for dropdown changes and display selected parsha
+// Add Event Listener for Dropdown Changes (added only once)
+parshaSelect.addEventListener('change', async () => {
+  const selectedParsha = parshaSelect.value;
+
+  if (selectedParsha) {
+    // Filter charts based on the selected parsha
+    filterChartsByParsha(selectedParsha);
+    
+    // Generate the weekly readings section
+    await generateWeeklyReadings(selectedParsha);
+  } else {
+    // Clear charts and weekly readings if no selection
+    resetChartsAndReadings();
+  }
+});
+
+// Function to filter charts based on the selected parsha
+function filterChartsByParsha(parsha) {
+  // Recreate the data structures only for the selected parsha
+  riteLengths = {};
+  bookVerseCountsByRite = {};
+  uniqueVersesByRiteAndBook = {}; // Dictionary to track unique verses per rite and book
+
+  rites.forEach(rite => {
+    bookVerseCountsByRite[rite] = {};
+    riteLengths[rite] = [];
+    uniqueVersesByRiteAndBook[rite] = {}; 
+  });
+
+  // Only process data for the selected parsha
+  rites.forEach(rite => {
+    const readingData = haftarahData[parsha][rite];
+
+    if (readingData) {
+      const verses = readingData.individual_verses;
+
+      verses.forEach(verse => {
+        const book = getBookName(verse);
+
+        // Initialize counts if needed
+        bookVerseCountsByRite[rite][book] ??= {
+          unique: 0,
+          overlap: {},
+          uniqueVerses: [],
+          overlapVerses: {},
+        };
+
+        const verseKey = `${verse}-${rite}`;
+        const overlapCount = overlapData[verseKey]?.rites.length || 1;
+
+        // Initialize overlap counts if needed
+        bookVerseCountsByRite[rite][book].overlap[overlapCount] ??= 0;
+        bookVerseCountsByRite[rite][book].overlapVerses[overlapCount] ??= [];
+
+        if (overlapCount > 1) {
+          bookVerseCountsByRite[rite][book].overlap[overlapCount]++;
+          bookVerseCountsByRite[rite][book].overlapVerses[overlapCount].push({ verse, parsha });
+        } else {
+          bookVerseCountsByRite[rite][book].unique++;
+          bookVerseCountsByRite[rite][book].uniqueVerses.push({ verse, parsha });
+        }
+
+        // Track unique verses read by this rite
+        uniqueVersesByRiteAndBook[rite][book] ??= new Set();
+        uniqueVersesByRiteAndBook[rite][book].add(verse);
+      });
+
+      riteLengths[rite].push(verses.length);
+    }
+  });
+
+  // Recreate charts and tables based on the filtered data
+  toggleChartOrder();
+  createLengthChart();
+  populatePercentageTable();
+}
+
+// Reset charts and weekly readings when no parsha is selected
+function resetChartsAndReadings() {
+  weeklyReadingsContainer.innerHTML = ''; // Clear weekly readings
+
+  // Reset data processing for all parshas
+  processData();
+  toggleChartOrder();
+  createLengthChart();
+  populatePercentageTable();
+}
 
 // Populate the dropdown with available parshiot
 function populateDropdown() {
@@ -464,15 +588,6 @@ function populateDropdown() {
   }
 }
 
-// Listen for dropdown changes and display selected parsha
-parshaSelect.addEventListener('change', async () => {
-  const selectedParsha = parshaSelect.value;
-  if (selectedParsha) {
-    await generateWeeklyReadings(selectedParsha);
-  } else {
-    weeklyReadingsContainer.innerHTML = ''; // Clear if no selection
-  }
-});
 
 // Display Haftarah readings for a specific parsha
 async function generateWeeklyReadings(selectedParsha) {
@@ -601,7 +716,6 @@ async function fetchHebrewTextRange(reference) {
   try {
     const response = await fetch(`https://www.sefaria.org/api/texts/${reference}?lang=he&context=0`);
     const data = await response.json();
-
     return Array.isArray(data.he) ? data.he : ["[Text not available]"];
   } catch (error) {
     console.error(`Error fetching Hebrew text for reference: ${reference}`, error);
@@ -609,11 +723,3 @@ async function fetchHebrewTextRange(reference) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Ensure data is loaded and generate all required sections on page load
-  loadHaftarahReadings().then(() => {
-    generateOrderedVerseList();
-    generateWeeklyReadings();
-    populateDropdown();
-  });
-});
