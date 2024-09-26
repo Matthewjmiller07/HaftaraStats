@@ -87,8 +87,60 @@ document.addEventListener('DOMContentLoaded', () => {
   loadHaftarahReadings().then(() => {
     generateWeeklyReadings();
     populateDropdown();
+
+    // Set the default parsha in the dropdown
+    setDefaultParsha(); // Call this function to set the current week's parsha
   });
 });
+
+async function setDefaultParsha() {
+  try {
+    // Fetch today's parsha data
+    const response = await fetch('https://www.sefaria.org/api/calendars');
+    const data = await response.json();
+
+    // Find the Parashat Hashavua item
+    const parshaItem = data.calendar_items.find(item => item.title.en === "Parashat Hashavua");
+
+    if (parshaItem) {
+      let parshaName = parshaItem.displayValue.en;
+
+      // Check for double parsha and apply the appropriate logic
+      if (parshaName.includes('-')) {
+        if (parshaName === "Acharei Mot-Kedoshim") {
+          // Special case: Use the first part for "Acharei Mot-Kedoshim"
+          parshaName = parshaName.split('-')[0].trim();
+        } else {
+          // For all other double parshas, use the second part
+          parshaName = parshaName.split('-')[1].trim();
+        }
+      }
+
+      console.log(`Today's parsha is: ${parshaName}`);
+
+      // Set the dropdown to the current parsha
+      let found = false;
+      for (const option of parshaSelect.options) {
+        if (option.text === parshaName) {
+          option.selected = true;
+          found = true;
+
+          // Trigger the change event to load data for the selected parsha
+          parshaSelect.dispatchEvent(new Event('change'));
+          break;
+        }
+      }
+
+      if (!found) {
+        console.warn(`Parsha '${parshaName}' not found in dropdown options.`);
+      }
+    } else {
+      console.error("No 'Parashat Hashavua' item found in the calendar data.");
+    }
+  } catch (error) {
+    console.error('Error fetching current parsha:', error);
+  }
+}
 
 // Load the updated JSON file with lengths and individual verses
 async function loadHaftarahReadings() {
@@ -466,35 +518,7 @@ document.querySelectorAll("#order-toggle input[type=radio]").forEach(radio => {
 });
 
 
-// Generate the ordered list of verses per book per rite
-function generateOrderedVerseList() {
-  const verseListDiv = document.getElementById('ordered-verse-list');
-  verseListDiv.innerHTML = ''; // Clear previous content
 
-  Array.from(activeRites).forEach(rite => {
-    const riteSection = document.createElement('div');
-    const riteHeading = document.createElement('h3');
-    riteHeading.textContent = `${rite} Rite`;
-    riteSection.appendChild(riteHeading);
-
-    const sortedBooks = bookOrder
-      .map(book => ({
-        book: book,
-        verses: bookVerseCountsByRite[rite][book] || { unique: 0, overlap: { 2: 0, 3: 0 } }
-      }))
-      .sort((a, b) => (b.verses.unique + b.verses.overlap[2] * 2 + b.verses.overlap[3] * 3) - (a.verses.unique + a.verses.overlap[2] * 2 + a.verses.overlap[3] * 3));
-
-    const ol = document.createElement('ol');
-    sortedBooks.forEach(({ book, verses }) => {
-      const li = document.createElement('li');
-      li.textContent = `${book}: ${verses.unique} unique, ${verses.overlap[2]} 2x, ${verses.overlap[3]} 3x`;
-      ol.appendChild(li);
-    });
-
-    riteSection.appendChild(ol);
-    verseListDiv.appendChild(riteSection);
-  });
-}
 
 
 
@@ -590,7 +614,17 @@ function resetChartsAndReadings() {
 
 // Populate the dropdown with available parshiot
 function populateDropdown() {
-  for (const parsha of Object.keys(haftarahData)) {
+  // Clear existing options
+  parshaSelect.innerHTML = '';
+
+  // Add a default option
+  const defaultOption = document.createElement('option');
+  defaultOption.value = '';
+  defaultOption.textContent = 'Select a Parsha';
+  parshaSelect.appendChild(defaultOption);
+
+  // Add all parshiot from haftarahData
+  for (const parsha of Object.keys(haftarahData).sort()) { // Sort parshiot alphabetically (or adjust order as needed)
     const option = document.createElement('option');
     option.value = parsha;
     option.textContent = parsha;
