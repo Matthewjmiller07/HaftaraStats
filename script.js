@@ -67,29 +67,43 @@ document.addEventListener('DOMContentLoaded', () => {
     return; // Stop further execution if elements are missing
   }
 
-  // Event listener for dropdown changes (add only if 'parshaSelect' is defined)
+  // Event listener for dropdown changes
   parshaSelect.addEventListener('change', async () => {
     const selectedParsha = parshaSelect.value;
 
     if (selectedParsha) {
-      // Filter charts based on the selected parsha
+      // Filter charts and readings based on the selected parsha
       filterChartsByParsha(selectedParsha);
-
-      // Generate the weekly readings section
       await generateWeeklyReadings(selectedParsha);
     } else {
-      // Clear charts and weekly readings if no selection
       resetChartsAndReadings();
     }
   });
 
-  // Ensure data is loaded and generate all required sections on page load
-  loadHaftarahReadings().then(() => {
-    generateWeeklyReadings();
-    populateDropdown();
+  // Event listeners for rite selection changes
+  document.querySelectorAll("#rite-selection input[type=checkbox]").forEach(checkbox => {
+    checkbox.addEventListener('change', async (event) => {
+      const rite = event.target.value;
 
-    // Set the default parsha in the dropdown
-    setDefaultParsha(); // Call this function to set the current week's parsha
+      if (event.target.checked) {
+        activeRites.add(rite);
+      } else {
+        activeRites.delete(rite);
+      }
+
+      // Regenerate weekly readings based on the current parsha and active rites
+      const selectedParsha = parshaSelect.value;
+      if (selectedParsha) {
+        await generateWeeklyReadings(selectedParsha);
+      }
+    });
+  });
+
+  // Ensure data is loaded and generate all required sections on page load
+  loadHaftarahReadings().then(async () => {
+    populateDropdown();
+    await setDefaultParsha();
+    await generateWeeklyReadings(parshaSelect.value);
   });
 });
 
@@ -452,45 +466,73 @@ function calculateTotalVersesRead(rite, book) {
 }
 
 function populatePercentageTable() {
-  const tbody = document.querySelector("#percentageTable tbody");
+  const table = document.querySelector("#percentageTable");
+  const thead = table.querySelector("thead");
+  const tbody = table.querySelector("tbody");
+
   tbody.innerHTML = "";
+  thead.innerHTML = "";
 
+  // Create the header row based on active rites
+  const headerRow = thead.insertRow();
+  headerRow.insertCell().textContent = 'Book';
+
+  // Add a header cell for each active rite
+  Array.from(rites).forEach((rite) => {
+    const headerCell = document.createElement("th");
+    headerCell.textContent = rite;
+    headerRow.appendChild(headerCell);
+  });
+
+  // Create rows for each book
   bookOrder.forEach((book) => {
-      const row = tbody.insertRow();
-      row.insertCell().textContent = book;
+    const row = tbody.insertRow();
+    row.insertCell().textContent = book;
 
-      Array.from(activeRites).forEach((rite) => {
-          const counts = bookVerseCountsByRite[rite][book] || {
-              unique: 0,
-              overlap: {},
-              uniqueVerses: [],
-              overlapVerses: {},
-          };
-          const totalVerses = totalVersesPerBook[book];
+    // Add cells for each rite (active or not) to maintain consistent spacing
+    rites.forEach((rite) => {
+      const cell = row.insertCell();
+      // Only populate the cell if the rite is active
+      if (activeRites.has(rite)) {
+        const counts = bookVerseCountsByRite[rite][book] || {
+          unique: 0,
+          overlap: {},
+          uniqueVerses: [],
+          overlapVerses: {},
+        };
+        const totalVerses = totalVersesPerBook[book];
 
-          let versesRead = 0;
+        let versesRead = counts.unique;
 
-          // Always count unique verses
-          versesRead = counts.unique;
+        // Add the counts of overlapping verses
+        for (const overlapCount in counts.overlap) {
+          versesRead += counts.overlap[overlapCount];
+        }
 
-          // Add the counts of overlapping verses 
-          for (const overlapCount in counts.overlap) {
-              versesRead += counts.overlap[overlapCount];
-          }
+        const percentage = Math.min(((versesRead / totalVerses) * 100), 100).toFixed(2);
 
-          const percentage = Math.min(((versesRead / totalVerses) * 100), 100).toFixed(2);
+        // Log for debugging
+        console.log(`--- Calculating percentage for ${rite} in ${book} ---`);
+        console.log("counts:", counts);
+        console.log("totalVerses:", totalVerses);
+        console.log("versesRead:", versesRead);
+        console.log("percentage:", percentage);
 
-          // You can keep or remove these logging statements as needed for debugging
-          console.log(`--- Calculating percentage for ${rite} in ${book} ---`);
-          console.log("counts:", counts);
-          console.log("totalVerses:", totalVerses);
-          console.log("versesRead:", versesRead);
-          console.log("percentage:", percentage);
-
-          const cell = row.insertCell();
-          cell.textContent = `${percentage}%`;
+        // Set cell content and background color
+        cell.textContent = `${percentage}%`;
+        
+        // Check for 0.00% and apply grey style
+        if (percentage === "0.00") {
+          cell.style.backgroundColor = "lightgrey"; // Grey out cells with 0.00%
+          cell.style.color = "darkgrey"; // Make the text color dark grey for contrast
+        } else {
           cell.style.backgroundColor = riteColors[rite];
-      });
+        }
+      } else {
+        // Empty cell for non-active rites
+        cell.textContent = "";
+      }
+    });
   });
 }
 
@@ -623,8 +665,8 @@ function populateDropdown() {
   defaultOption.textContent = 'Select a Parsha';
   parshaSelect.appendChild(defaultOption);
 
-  // Add all parshiot from haftarahData
-  for (const parsha of Object.keys(haftarahData).sort()) { // Sort parshiot alphabetically (or adjust order as needed)
+  // Add all parshiot from haftarahData in the original order
+  for (const parsha of Object.keys(haftarahData)) { // Use natural order from the JSON
     const option = document.createElement('option');
     option.value = parsha;
     option.textContent = parsha;
@@ -650,6 +692,9 @@ async function generateWeeklyReadings(selectedParsha) {
 
   // Loop through each rite for this parsha
   for (const rite of Object.keys(haftarahData[selectedParsha])) {
+    // **Only proceed if the rite is active**
+    if (!activeRites.has(rite)) continue;
+
     const readingData = haftarahData[selectedParsha][rite];
 
     if (readingData) {
@@ -657,8 +702,6 @@ async function generateWeeklyReadings(selectedParsha) {
 
       // Use the first reference range to fetch the entire Haftarah
       let reference = readingData.references[0];
-
-      console.log(`Reference for ${selectedParsha}, ${rite}:`, reference);
 
       // Handle multi-word book names
       reference = reference
@@ -668,55 +711,29 @@ async function generateWeeklyReadings(selectedParsha) {
         .replace('II Samuel', 'II_Samuel');
 
       const formattedReference = reference.replace(/ /g, ".").replace(":", ".");
-      console.log(`Formatted reference:`, formattedReference);
-
-      const splitReference = formattedReference.split(".");
-      if (splitReference.length < 3) {
-        console.error(`Unexpected format for reference: ${formattedReference}`);
-        continue;
-      }
-
-      const startChapter = parseInt(splitReference[1], 10);
-      const startVerse = parseInt(splitReference[2].split("–")[0], 10);
 
       // Fetch the Hebrew text for the range from Sefaria
       const hebrewVerses = await fetchHebrewTextRange(formattedReference);
-      console.log(`Hebrew verses fetched for ${formattedReference}:`, hebrewVerses);
-
-      let currentChapter = startChapter;
-      let verseIndex = startVerse;
+      let currentChapter = parseInt(formattedReference.split(".")[1], 10);
+      let verseIndex = parseInt(formattedReference.split(".")[2].split("–")[0], 10);
 
       // Collect all verses in an array for sorting
       const versesWithIndices = [];
 
-      // Iterate over the chapters and verses
       hebrewVerses.forEach((chapterVerses, chapterOffset) => {
         if (Array.isArray(chapterVerses)) {
-          currentChapter = startChapter + chapterOffset;
-          if (chapterOffset > 0) {
-            verseIndex = 1; // Reset verse index for new chapters
-          }
-
+          currentChapter += chapterOffset;
+          if (chapterOffset > 0) verseIndex = 1; // Reset verse index for new chapters
           chapterVerses.forEach((text, index) => {
-            versesWithIndices.push({
-              chapter: currentChapter,
-              verse: verseIndex + index,
-              text,
-              rite,
-            });
+            versesWithIndices.push({ chapter: currentChapter, verse: verseIndex + index, text, rite });
           });
         } else {
-          versesWithIndices.push({
-            chapter: currentChapter,
-            verse: verseIndex,
-            text: chapterVerses,
-            rite,
-          });
-          verseIndex += 1;
+          versesWithIndices.push({ chapter: currentChapter, verse: verseIndex, text: chapterVerses, rite });
+          verseIndex++;
         }
       });
 
-      // Append the rite container to the parsha container
+      // Create and append rite container
       const riteContainer = document.createElement('div');
       riteContainer.classList.add('rite-container');
       const riteTitle = document.createElement('h3');
@@ -724,7 +741,7 @@ async function generateWeeklyReadings(selectedParsha) {
       riteContainer.appendChild(riteTitle);
       parshaContainer.appendChild(riteContainer);
 
-      // Map each verse to its associated rite
+      // Map verses to the current rite
       versesWithIndices.forEach(({ chapter, verse, text }) => {
         const verseKey = `${chapter}:${verse}`;
         addVerseToMap(verseKey, text, rite, verseRiteMap);
@@ -732,21 +749,20 @@ async function generateWeeklyReadings(selectedParsha) {
     }
   }
 
-  // Sort verses by chapter and verse number
-  const sortedVerseKeys = Object.keys(verseRiteMap).sort((a, b) => {
+  // Filter and display verses based on the active rites
+  for (const verseKey of Object.keys(verseRiteMap).sort((a, b) => {
     const [aChapter, aVerse] = a.split(':').map(Number);
     const [bChapter, bVerse] = b.split(':').map(Number);
     return aChapter === bChapter ? aVerse - bVerse : aChapter - bChapter;
-  });
-
-  // Display sorted verses and apply highlights based on the rites sharing them
-  for (const verseKey of sortedVerseKeys) {
+  })) {
     const { rites, text } = verseRiteMap[verseKey];
+    if (!rites.some(rite => activeRites.has(rite))) continue; // Skip if none of the rites are active
+
     const verseSpan = document.createElement('span');
     verseSpan.classList.add('verse-span');
     verseSpan.innerHTML = `<strong>${verseKey}</strong>: ${text}`;
 
-    // Apply a highlight if the verse is shared among multiple rites
+    // Highlight if shared among multiple rites
     if (rites.length > 1) {
       verseSpan.classList.add('shared-verse');
     } else {
@@ -754,12 +770,14 @@ async function generateWeeklyReadings(selectedParsha) {
       verseSpan.classList.add(`${uniqueRite}-unique-verse`);
     }
 
-    // Append the verse span to each respective rite container
+    // Append the verse span to the respective rite containers
     rites.forEach(rite => {
-      const riteContainers = parshaContainer.getElementsByClassName('rite-container');
-      for (const container of riteContainers) {
-        if (container.querySelector('h3').textContent.includes(rite)) {
-          container.appendChild(verseSpan.cloneNode(true));
+      if (activeRites.has(rite)) {
+        const riteContainers = parshaContainer.getElementsByClassName('rite-container');
+        for (const container of riteContainers) {
+          if (container.querySelector('h3').textContent.includes(rite)) {
+            container.appendChild(verseSpan.cloneNode(true));
+          }
         }
       }
     });
