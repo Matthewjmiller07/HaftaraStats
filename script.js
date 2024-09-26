@@ -336,7 +336,9 @@ function createBookChart() {
       label: `${rite} Unique`,
       data: uniqueCounts,
       backgroundColor: riteColors[rite], // Use the defined color
-      stack: rite
+      stack: rite,
+      // Hide this dataset from the legend
+      showInLegend: false
     });
 
     // Add dataset for 2x counts (multiplied for height)
@@ -344,7 +346,9 @@ function createBookChart() {
       label: `${rite} 2x`,
       data: doubleCounts,
       backgroundColor: riteColors[rite] ? riteColors[rite].replace('0.6', '0.4') : 'rgba(0, 0, 0, 0.2)', // Fallback for undefined colors
-      stack: rite
+      stack: rite,
+      // Hide this dataset from the legend
+      showInLegend: false
     });
 
     // Add dataset for 3x counts (multiplied for height)
@@ -352,6 +356,16 @@ function createBookChart() {
       label: `${rite} 3x`,
       data: tripleCounts,
       backgroundColor: riteColors[rite] ? riteColors[rite].replace('0.6', '0.2') : 'rgba(0, 0, 0, 0.2)', // Use fallback color
+      stack: rite,
+      // Hide this dataset from the legend
+      showInLegend: false
+    });
+
+    // Add an empty dataset with only the main color for the legend
+    datasets.push({
+      label: rite,
+      data: new Array(bookOrder.length).fill(0), // Empty data as it's only for the legend
+      backgroundColor: riteColors[rite], // Main color for the rite
       stack: rite
     });
   });
@@ -384,6 +398,15 @@ function createBookChart() {
               } else {
                 return `${datasetLabel}: ${value} verses`;
               }
+            }
+          }
+        },
+        legend: {
+          display: true, // Display legend with only rite names
+          labels: {
+            filter: function(item) {
+              // Show only the main rite labels in the legend
+              return !item.text.includes('Unique') && !item.text.includes('2x') && !item.text.includes('3x');
             }
           }
         }
