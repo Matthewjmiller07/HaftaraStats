@@ -10,3 +10,85 @@ body {
   canvas {
     margin-bottom: 50px;
   }
+
+  /* Container for the entire Weekly Readings section */
+.weekly-readings-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Container for each Parsha */
+.parsha-container {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+}
+
+/* Header for each Parsha */
+.parsha-container h2 {
+  margin-top: 0;
+  font-size: 1.5em;
+}
+
+/* Container for each Rite */
+.rite-container {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #fff;
+}
+
+/* Header for each Rite */
+.rite-container h3 {
+  margin-top: 0;
+  font-size: 1.2em;
+  color: #333;
+}
+
+/* Verse styling */
+.verse-span {
+  display: inline-block;
+  margin: 3px;
+  padding: 5px;
+  font-size: 1em;
+  font-family: 'David', 'SBL Hebrew', 'Times New Roman', serif;
+}
+
+/* Shared verses styling across rites */
+.shared-verse {
+  background-color: #ffff99; /* Yellow highlight for shared verses */
+  font-weight: bold;
+}
+/* Unique verse styling for each rite */
+.ashkenazi-unique-verse {
+  background-color: #cce5ff; /* Light blue for Ashkenazi */
+}
+
+.sephardi-unique-verse {
+  background-color: #ffcce6; /* Light pink for Sephardi */
+}
+
+.portuguese-unique-verse {
+  background-color: #ccffcc; /* Light green for Portuguese */
+}
+
+.italian-unique-verse {
+  background-color: #ffcccc; /* Light coral for Italian */
+}
+
+.yemenite-unique-verse {
+  background-color: #ffcc99; /* Light orange for Yemenite */
+}
+
+.romaniote-unique-verse {
+  background-color: #ffffcc; /* Light yellow for Romaniote */
+}
+
+.karaite-unique-verse {
+  background-color: #e0ccff; /* Light purple for Karaite */
+}

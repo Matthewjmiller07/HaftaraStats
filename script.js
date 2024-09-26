@@ -449,6 +449,171 @@ function generateOrderedVerseList() {
   });
 }
 
-// Ensure the ordered list and charts are generated on page load
-loadHaftarahReadings().then(() => generateOrderedVerseList());
-loadHaftarahReadings();
+
+// Initialize dropdown and weekly readings container
+const parshaSelect = document.getElementById('parsha-select');
+const weeklyReadingsContainer = document.getElementById('weekly-readings');
+
+// Populate the dropdown with available parshiot
+function populateDropdown() {
+  for (const parsha of Object.keys(haftarahData)) {
+    const option = document.createElement('option');
+    option.value = parsha;
+    option.textContent = parsha;
+    parshaSelect.appendChild(option);
+  }
+}
+
+// Listen for dropdown changes and display selected parsha
+parshaSelect.addEventListener('change', async () => {
+  const selectedParsha = parshaSelect.value;
+  if (selectedParsha) {
+    await generateWeeklyReadings(selectedParsha);
+  } else {
+    weeklyReadingsContainer.innerHTML = ''; // Clear if no selection
+  }
+});
+
+// Display Haftarah readings for a specific parsha
+async function generateWeeklyReadings(selectedParsha) {
+  weeklyReadingsContainer.innerHTML = ''; // Clear any old content
+
+  const parshaContainer = document.createElement('div');
+  parshaContainer.classList.add('parsha-container');
+
+  // Add parsha title
+  const parshaTitle = document.createElement('h2');
+  parshaTitle.textContent = `Parsha: ${selectedParsha}`;
+  parshaContainer.appendChild(parshaTitle);
+
+  // Create a map to store verse references and associated rites
+  const verseRiteMap = {};
+
+  // Loop through each rite for this parsha
+  for (const rite of Object.keys(haftarahData[selectedParsha])) {
+    const readingData = haftarahData[selectedParsha][rite];
+
+    if (readingData) {
+      console.log(`Reading data for ${selectedParsha} - ${rite}:`, readingData);
+
+      // Use the first reference range to fetch the entire Haftarah
+      let reference = readingData.references[0];
+
+      console.log(`Reference for ${selectedParsha}, ${rite}:`, reference);
+
+      // Handle multi-word book names
+      reference = reference
+        .replace('I Kings', 'I_Kings')
+        .replace('II Kings', 'II_Kings')
+        .replace('I Samuel', 'I_Samuel')
+        .replace('II Samuel', 'II_Samuel');
+
+      const formattedReference = reference.replace(/ /g, ".").replace(":", ".");
+      console.log(`Formatted reference:`, formattedReference);
+
+      const splitReference = formattedReference.split(".");
+      if (splitReference.length < 3) {
+        console.error(`Unexpected format for reference: ${formattedReference}`);
+        continue;
+      }
+
+      const startChapter = parseInt(splitReference[1], 10);
+      const startVerse = parseInt(splitReference[2].split("–")[0], 10);
+
+      // Fetch the Hebrew text for the range from Sefaria
+      const hebrewVerses = await fetchHebrewTextRange(formattedReference);
+      console.log(`Hebrew verses fetched for ${formattedReference}:`, hebrewVerses);
+
+      let currentChapter = startChapter;
+      let verseIndex = startVerse;
+
+      // Create a container for each rite
+      const riteContainer = document.createElement('div');
+      riteContainer.classList.add('rite-container');
+
+      // Add rite title and main reference
+      const riteTitle = document.createElement('h3');
+      riteTitle.textContent = `${rite} Rite - ${reference.replace('_', ' ')}`;
+      riteContainer.appendChild(riteTitle);
+
+      // Map each verse to its associated rite and add to the container
+      hebrewVerses.forEach((chapterVerses, chapterOffset) => {
+        if (Array.isArray(chapterVerses)) {
+          currentChapter = startChapter + chapterOffset;
+          if (chapterOffset > 0) {
+            verseIndex = 1; // Reset verse index for new chapters
+          }
+
+          chapterVerses.forEach((text, index) => {
+            const verseKey = `${currentChapter}:${verseIndex + index}`;
+            addVerseToMap(verseKey, text, rite, verseRiteMap);
+          });
+        } else {
+          const verseKey = `${currentChapter}:${verseIndex}`;
+          addVerseToMap(verseKey, chapterVerses, rite, verseRiteMap);
+          verseIndex += 1;
+        }
+      });
+
+      // Append the rite container to the parsha container
+      parshaContainer.appendChild(riteContainer);
+    }
+  }
+
+  // Display verses and apply highlights based on the rites sharing them
+  for (const [verseKey, { rites, text }] of Object.entries(verseRiteMap)) {
+    const verseSpan = document.createElement('span');
+    verseSpan.classList.add('verse-span');
+    verseSpan.innerHTML = `<strong>${verseKey}</strong>: ${text}`;
+
+    // Apply a highlight if the verse is shared among multiple rites
+    if (rites.length > 1) {
+      verseSpan.classList.add('shared-verse');
+    } else {
+      const uniqueRite = rites[0].toLowerCase();
+      verseSpan.classList.add(`${uniqueRite}-unique-verse`);
+    }
+
+    // Append the verse span to each respective rite container
+    rites.forEach(rite => {
+      const riteContainers = parshaContainer.getElementsByClassName('rite-container');
+      for (const container of riteContainers) {
+        if (container.querySelector('h3').textContent.includes(rite)) {
+          container.appendChild(verseSpan.cloneNode(true));
+        }
+      }
+    });
+  }
+
+  weeklyReadingsContainer.appendChild(parshaContainer);
+}
+
+// Function to add verses to the map
+function addVerseToMap(verseKey, verseText, rite, verseRiteMap) {
+  if (!verseRiteMap[verseKey]) {
+    verseRiteMap[verseKey] = { rites: [], text: verseText };
+  }
+  verseRiteMap[verseKey].rites.push(rite);
+}
+
+// Function to fetch Hebrew text range from Sefaria
+async function fetchHebrewTextRange(reference) {
+  try {
+    const response = await fetch(`https://www.sefaria.org/api/texts/${reference}?lang=he&context=0`);
+    const data = await response.json();
+
+    return Array.isArray(data.he) ? data.he : ["[Text not available]"];
+  } catch (error) {
+    console.error(`Error fetching Hebrew text for reference: ${reference}`, error);
+    return ["Error fetching text"];
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Ensure data is loaded and generate all required sections on page load
+  loadHaftarahReadings().then(() => {
+    generateOrderedVerseList();
+    generateWeeklyReadings();
+    populateDropdown();
+  });
+});

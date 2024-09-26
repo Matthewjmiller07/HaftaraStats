@@ -1,0 +1,381 @@
+Reference,Books,Chapter,Verses
+Bible,Joshua,1,18
+Bible,Joshua,2,24
+Bible,Joshua,3,17
+Bible,Joshua,4,24
+Bible,Joshua,5,15
+Bible,Joshua,6,27
+Bible,Joshua,7,26
+Bible,Joshua,8,35
+Bible,Joshua,9,27
+Bible,Joshua,10,43
+Bible,Joshua,11,23
+Bible,Joshua,12,24
+Bible,Joshua,13,33
+Bible,Joshua,14,15
+Bible,Joshua,15,63
+Bible,Joshua,16,10
+Bible,Joshua,17,18
+Bible,Joshua,18,28
+Bible,Joshua,19,51
+Bible,Joshua,20,9
+Bible,Joshua,21,45
+Bible,Joshua,22,34
+Bible,Joshua,23,16
+Bible,Joshua,24,33
+Bible,Judges,1,36
+Bible,Judges,2,23
+Bible,Judges,3,31
+Bible,Judges,4,24
+Bible,Judges,5,31
+Bible,Judges,6,40
+Bible,Judges,7,25
+Bible,Judges,8,35
+Bible,Judges,9,57
+Bible,Judges,10,18
+Bible,Judges,11,40
+Bible,Judges,12,15
+Bible,Judges,13,25
+Bible,Judges,14,20
+Bible,Judges,15,20
+Bible,Judges,16,31
+Bible,Judges,17,13
+Bible,Judges,18,31
+Bible,Judges,19,30
+Bible,Judges,20,48
+Bible,Judges,21,25
+Bible,I Samuel,1,28
+Bible,I Samuel,2,36
+Bible,I Samuel,3,21
+Bible,I Samuel,4,22
+Bible,I Samuel,5,12
+Bible,I Samuel,6,21
+Bible,I Samuel,7,17
+Bible,I Samuel,8,22
+Bible,I Samuel,9,27
+Bible,I Samuel,10,27
+Bible,I Samuel,11,15
+Bible,I Samuel,12,25
+Bible,I Samuel,13,23
+Bible,I Samuel,14,52
+Bible,I Samuel,15,35
+Bible,I Samuel,16,23
+Bible,I Samuel,17,58
+Bible,I Samuel,18,30
+Bible,I Samuel,19,24
+Bible,I Samuel,20,42
+Bible,I Samuel,21,16
+Bible,I Samuel,22,23
+Bible,I Samuel,23,28
+Bible,I Samuel,24,23
+Bible,I Samuel,25,44
+Bible,I Samuel,26,25
+Bible,I Samuel,27,12
+Bible,I Samuel,28,25
+Bible,I Samuel,29,11
+Bible,I Samuel,30,31
+Bible,I Samuel,31,13
+Bible,II Samuel,1,27
+Bible,II Samuel,2,32
+Bible,II Samuel,3,39
+Bible,II Samuel,4,12
+Bible,II Samuel,5,25
+Bible,II Samuel,6,23
+Bible,II Samuel,7,29
+Bible,II Samuel,8,18
+Bible,II Samuel,9,13
+Bible,II Samuel,10,19
+Bible,II Samuel,11,27
+Bible,II Samuel,12,31
+Bible,II Samuel,13,39
+Bible,II Samuel,14,33
+Bible,II Samuel,15,37
+Bible,II Samuel,16,23
+Bible,II Samuel,17,29
+Bible,II Samuel,18,32
+Bible,II Samuel,19,44
+Bible,II Samuel,20,26
+Bible,II Samuel,21,22
+Bible,II Samuel,22,51
+Bible,II Samuel,23,39
+Bible,II Samuel,24,25
+Bible,I Kings,1,53
+Bible,I Kings,2,46
+Bible,I Kings,3,28
+Bible,I Kings,4,20
+Bible,I Kings,5,32
+Bible,I Kings,6,38
+Bible,I Kings,7,51
+Bible,I Kings,8,66
+Bible,I Kings,9,28
+Bible,I Kings,10,29
+Bible,I Kings,11,43
+Bible,I Kings,12,33
+Bible,I Kings,13,34
+Bible,I Kings,14,31
+Bible,I Kings,15,34
+Bible,I Kings,16,34
+Bible,I Kings,17,24
+Bible,I Kings,18,46
+Bible,I Kings,19,21
+Bible,I Kings,20,43
+Bible,I Kings,21,29
+Bible,I Kings,22,54
+Bible,II Kings,1,18
+Bible,II Kings,2,25
+Bible,II Kings,3,27
+Bible,II Kings,4,44
+Bible,II Kings,5,27
+Bible,II Kings,6,33
+Bible,II Kings,7,20
+Bible,II Kings,8,29
+Bible,II Kings,9,37
+Bible,II Kings,10,36
+Bible,II Kings,11,20
+Bible,II Kings,12,22
+Bible,II Kings,13,25
+Bible,II Kings,14,29
+Bible,II Kings,15,38
+Bible,II Kings,16,20
+Bible,II Kings,17,41
+Bible,II Kings,18,37
+Bible,II Kings,19,37
+Bible,II Kings,20,21
+Bible,II Kings,21,26
+Bible,II Kings,22,20
+Bible,II Kings,23,37
+Bible,II Kings,24,20
+Bible,II Kings,25,30
+Bible,Isaiah,1,31
+Bible,Isaiah,2,22
+Bible,Isaiah,3,26
+Bible,Isaiah,4,6
+Bible,Isaiah,5,30
+Bible,Isaiah,6,13
+Bible,Isaiah,7,25
+Bible,Isaiah,8,23
+Bible,Isaiah,9,20
+Bible,Isaiah,10,34
+Bible,Isaiah,11,16
+Bible,Isaiah,12,6
+Bible,Isaiah,13,22
+Bible,Isaiah,14,32
+Bible,Isaiah,15,9
+Bible,Isaiah,16,14
+Bible,Isaiah,17,14
+Bible,Isaiah,18,7
+Bible,Isaiah,19,25
+Bible,Isaiah,20,6
+Bible,Isaiah,21,17
+Bible,Isaiah,22,25
+Bible,Isaiah,23,18
+Bible,Isaiah,24,23
+Bible,Isaiah,25,12
+Bible,Isaiah,26,21
+Bible,Isaiah,27,13
+Bible,Isaiah,28,29
+Bible,Isaiah,29,24
+Bible,Isaiah,30,33
+Bible,Isaiah,31,9
+Bible,Isaiah,32,20
+Bible,Isaiah,33,24
+Bible,Isaiah,34,17
+Bible,Isaiah,35,10
+Bible,Isaiah,36,22
+Bible,Isaiah,37,38
+Bible,Isaiah,38,22
+Bible,Isaiah,39,8
+Bible,Isaiah,40,31
+Bible,Isaiah,41,29
+Bible,Isaiah,42,25
+Bible,Isaiah,43,28
+Bible,Isaiah,44,28
+Bible,Isaiah,45,25
+Bible,Isaiah,46,13
+Bible,Isaiah,47,15
+Bible,Isaiah,48,22
+Bible,Isaiah,49,26
+Bible,Isaiah,50,11
+Bible,Isaiah,51,23
+Bible,Isaiah,52,15
+Bible,Isaiah,53,12
+Bible,Isaiah,54,17
+Bible,Isaiah,55,13
+Bible,Isaiah,56,12
+Bible,Isaiah,57,21
+Bible,Isaiah,58,14
+Bible,Isaiah,59,21
+Bible,Isaiah,60,22
+Bible,Isaiah,61,11
+Bible,Isaiah,62,12
+Bible,Isaiah,63,19
+Bible,Isaiah,64,11
+Bible,Isaiah,65,25
+Bible,Isaiah,66,24
+Bible,Jeremiah,1,19
+Bible,Jeremiah,2,37
+Bible,Jeremiah,3,25
+Bible,Jeremiah,4,31
+Bible,Jeremiah,5,31
+Bible,Jeremiah,6,30
+Bible,Jeremiah,7,34
+Bible,Jeremiah,8,23
+Bible,Jeremiah,9,25
+Bible,Jeremiah,10,25
+Bible,Jeremiah,11,23
+Bible,Jeremiah,12,17
+Bible,Jeremiah,13,27
+Bible,Jeremiah,14,22
+Bible,Jeremiah,15,21
+Bible,Jeremiah,16,21
+Bible,Jeremiah,17,27
+Bible,Jeremiah,18,23
+Bible,Jeremiah,19,15
+Bible,Jeremiah,20,18
+Bible,Jeremiah,21,14
+Bible,Jeremiah,22,30
+Bible,Jeremiah,23,40
+Bible,Jeremiah,24,10
+Bible,Jeremiah,25,38
+Bible,Jeremiah,26,24
+Bible,Jeremiah,27,22
+Bible,Jeremiah,28,17
+Bible,Jeremiah,29,32
+Bible,Jeremiah,30,24
+Bible,Jeremiah,31,40
+Bible,Jeremiah,32,44
+Bible,Jeremiah,33,26
+Bible,Jeremiah,34,22
+Bible,Jeremiah,35,19
+Bible,Jeremiah,36,32
+Bible,Jeremiah,37,21
+Bible,Jeremiah,38,28
+Bible,Jeremiah,39,18
+Bible,Jeremiah,40,16
+Bible,Jeremiah,41,18
+Bible,Jeremiah,42,22
+Bible,Jeremiah,43,13
+Bible,Jeremiah,44,30
+Bible,Jeremiah,45,5
+Bible,Jeremiah,46,28
+Bible,Jeremiah,47,7
+Bible,Jeremiah,48,47
+Bible,Jeremiah,49,39
+Bible,Jeremiah,50,46
+Bible,Jeremiah,51,64
+Bible,Jeremiah,52,34
+Bible,Ezekiel,1,28
+Bible,Ezekiel,2,10
+Bible,Ezekiel,3,27
+Bible,Ezekiel,4,17
+Bible,Ezekiel,5,17
+Bible,Ezekiel,6,14
+Bible,Ezekiel,7,27
+Bible,Ezekiel,8,18
+Bible,Ezekiel,9,11
+Bible,Ezekiel,10,22
+Bible,Ezekiel,11,25
+Bible,Ezekiel,12,28
+Bible,Ezekiel,13,23
+Bible,Ezekiel,14,23
+Bible,Ezekiel,15,8
+Bible,Ezekiel,16,63
+Bible,Ezekiel,17,24
+Bible,Ezekiel,18,32
+Bible,Ezekiel,19,14
+Bible,Ezekiel,20,44
+Bible,Ezekiel,21,37
+Bible,Ezekiel,22,31
+Bible,Ezekiel,23,49
+Bible,Ezekiel,24,27
+Bible,Ezekiel,25,17
+Bible,Ezekiel,26,21
+Bible,Ezekiel,27,36
+Bible,Ezekiel,28,26
+Bible,Ezekiel,29,21
+Bible,Ezekiel,30,26
+Bible,Ezekiel,31,18
+Bible,Ezekiel,32,32
+Bible,Ezekiel,33,33
+Bible,Ezekiel,34,31
+Bible,Ezekiel,35,15
+Bible,Ezekiel,36,38
+Bible,Ezekiel,37,28
+Bible,Ezekiel,38,23
+Bible,Ezekiel,39,29
+Bible,Ezekiel,40,49
+Bible,Ezekiel,41,26
+Bible,Ezekiel,42,20
+Bible,Ezekiel,43,27
+Bible,Ezekiel,44,31
+Bible,Ezekiel,45,25
+Bible,Ezekiel,46,24
+Bible,Ezekiel,47,23
+Bible,Ezekiel,48,35
+Bible,Hosea,1,9
+Bible,Hosea,2,25
+Bible,Hosea,3,5
+Bible,Hosea,4,19
+Bible,Hosea,5,15
+Bible,Hosea,6,11
+Bible,Hosea,7,16
+Bible,Hosea,8,14
+Bible,Hosea,9,17
+Bible,Hosea,10,15
+Bible,Hosea,11,11
+Bible,Hosea,12,15
+Bible,Hosea,13,15
+Bible,Hosea,14,10
+Bible,Joel,1,20
+Bible,Joel,2,27
+Bible,Joel,3,5
+Bible,Joel,4,21
+Bible,Amos,1,15
+Bible,Amos,2,16
+Bible,Amos,3,15
+Bible,Amos,4,13
+Bible,Amos,5,27
+Bible,Amos,6,14
+Bible,Amos,7,17
+Bible,Amos,8,14
+Bible,Amos,9,15
+Bible,Obadiah,1,21
+Bible,Jonah,1,16
+Bible,Jonah,2,11
+Bible,Jonah,3,10
+Bible,Jonah,4,11
+Bible,Micah,1,16
+Bible,Micah,2,13
+Bible,Micah,3,12
+Bible,Micah,4,14
+Bible,Micah,5,14
+Bible,Micah,6,16
+Bible,Micah,7,20
+Bible,Nahum,1,14
+Bible,Nahum,2,14
+Bible,Nahum,3,19
+Bible,Habakkuk,1,17
+Bible,Habakkuk,2,20
+Bible,Habakkuk,3,19
+Bible,Zephaniah,1,18
+Bible,Zephaniah,2,15
+Bible,Zephaniah,3,20
+Bible,Haggai,1,15
+Bible,Haggai,2,23
+Bible,Zechariah,1,17
+Bible,Zechariah,2,17
+Bible,Zechariah,3,10
+Bible,Zechariah,4,14
+Bible,Zechariah,5,11
+Bible,Zechariah,6,15
+Bible,Zechariah,7,14
+Bible,Zechariah,8,23
+Bible,Zechariah,9,17
+Bible,Zechariah,10,12
+Bible,Zechariah,11,17
+Bible,Zechariah,12,14
+Bible,Zechariah,13,9
+Bible,Zechariah,14,21
+Bible,Malachi,1,14
+Bible,Malachi,2,17
+Bible,Malachi,3,24
