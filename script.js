@@ -85,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Ensure data is loaded and generate all required sections on page load
   loadHaftarahReadings().then(() => {
-    generateOrderedVerseList();
     generateWeeklyReadings();
     populateDropdown();
   });
@@ -456,7 +455,6 @@ document.querySelectorAll("#rite-selection input[type=checkbox]").forEach(checkb
     toggleChartOrder();
     createLengthChart();
     populatePercentageTable();
-    generateOrderedVerseList();
   });
 });
 
@@ -755,4 +753,3 @@ async function fetchHebrewTextRange(reference) {
     return ["Error fetching text"];
   }
 }
-
