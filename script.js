@@ -538,6 +538,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       bookChartContainer.style.display = 'block'; // Show the verse count chart if no parsha is set
       createLengthChart(); // Create the unfiltered chart
+      createBookChart(); // Create the unfiltered book chart
     }
   });
 
@@ -582,6 +583,7 @@ document.addEventListener('DOMContentLoaded', () => {
         createLengthChart();
       }
       // Always update the chart order and any other charts that rely on rite selection
+      createBookChart(); // Recreate the book chart with the updated rites
       populatePercentageTable();
     });
   });
