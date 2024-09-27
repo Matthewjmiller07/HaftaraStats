@@ -56,56 +56,7 @@ let parshaSelect;
 let weeklyReadingsContainer;
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Initialize these variables after the DOM is fully loaded
-  parshaSelect = document.getElementById('parsha-select');
-  weeklyReadingsContainer = document.getElementById('weekly-readings');
 
-  // Ensure elements are correctly found in the DOM
-  if (!parshaSelect || !weeklyReadingsContainer) {
-    console.error("Error: Elements with IDs 'parsha-select' or 'weekly-readings' are not found in the DOM.");
-    return; // Stop further execution if elements are missing
-  }
-
-  // Event listener for dropdown changes
-  parshaSelect.addEventListener('change', async () => {
-    const selectedParsha = parshaSelect.value;
-
-    if (selectedParsha) {
-      // Filter charts and readings based on the selected parsha
-      filterChartsByParsha(selectedParsha);
-      await generateWeeklyReadings(selectedParsha);
-    } else {
-      resetChartsAndReadings();
-    }
-  });
-
-  // Event listeners for rite selection changes
-  document.querySelectorAll("#rite-selection input[type=checkbox]").forEach(checkbox => {
-    checkbox.addEventListener('change', async (event) => {
-      const rite = event.target.value;
-
-      if (event.target.checked) {
-        activeRites.add(rite);
-      } else {
-        activeRites.delete(rite);
-      }
-
-      // Regenerate weekly readings based on the current parsha and active rites
-      const selectedParsha = parshaSelect.value;
-      if (selectedParsha) {
-        await generateWeeklyReadings(selectedParsha);
-      }
-    });
-  });
-
-  // Ensure data is loaded and generate all required sections on page load
-  loadHaftarahReadings().then(async () => {
-    populateDropdown();
-    await setDefaultParsha();
-    await generateWeeklyReadings(parshaSelect.value);
-  });
-});
 
 async function setDefaultParsha() {
   try {
@@ -314,7 +265,7 @@ function toggleChartOrder() {
 
 // Create the chart for verses per book per rite with correct stacking
 // Create the chart for verses per book per rite with correct stacking
-function createBookChart() {
+function createBookChart(selectedParsha = null) {
   const ctx = document.getElementById('bookChart').getContext('2d');
 
   if (bookChartInstance) {
@@ -324,47 +275,61 @@ function createBookChart() {
   const datasets = [];
 
   Array.from(activeRites).forEach(rite => {
-    // Prepare the dataset for unique counts (no multiplication)
-    const uniqueCounts = bookOrder.map(book => {
-      const counts = bookVerseCountsByRite[rite][book] || { unique: 0, overlap: { 2: 0, 3: 0 } };
-      return counts.unique; // Unique verses
-    });
+    let combinedCounts;
 
-    // Prepare the dataset for 2x counts (multiplied by 2)
-    const doubleCounts = bookOrder.map(book => {
-      const counts = bookVerseCountsByRite[rite][book] || { unique: 0, overlap: { 2: 0, 3: 0 } };
-      return counts.overlap[2] * 2; // 2x verses multiplied by 2
-    });
+    // Combine all counts when a specific parsha is selected
+    if (selectedParsha) {
+      combinedCounts = bookOrder.map(book => {
+        const counts = bookVerseCountsByRite[rite][book] || { unique: 0, overlap: { 2: 0, 3: 0 } };
+        return counts.unique + (counts.overlap[2] || 0) + (counts.overlap[3] || 0); // Combine all counts into one
+      });
 
-    // Prepare the dataset for 3x counts (multiplied by 3)
-    const tripleCounts = bookOrder.map(book => {
-      const counts = bookVerseCountsByRite[rite][book] || { unique: 0, overlap: { 2: 0, 3: 0 } };
-      return counts.overlap[3] * 3; // 3x verses multiplied by 3
-    });
+      // Add a single dataset for each rite (not stacked)
+      datasets.push({
+        label: rite,
+        data: combinedCounts,
+        backgroundColor: riteColors[rite],
+        stack: false // Explicitly disable stacking
+      });
+    } else {
+      // When no parsha is selected, use the breakdown (unique, 2x, 3x)
+      const uniqueCounts = bookOrder.map(book => {
+        const counts = bookVerseCountsByRite[rite][book] || { unique: 0, overlap: { 2: 0, 3: 0 } };
+        return counts.unique; // Unique verses
+      });
 
-    // Add dataset for unique counts
-    datasets.push({
-      label: `${rite} Unique`,
-      data: uniqueCounts,
-      backgroundColor: riteColors[rite], // Use the defined color
-      stack: rite
-    });
+      const doubleCounts = bookOrder.map(book => {
+        const counts = bookVerseCountsByRite[rite][book] || { unique: 0, overlap: { 2: 0, 3: 0 } };
+        return counts.overlap[2] * 2; // 2x verses multiplied by 2
+      });
 
-    // Add dataset for 2x counts (multiplied for height)
-    datasets.push({
-      label: `${rite} 2x`,
-      data: doubleCounts,
-      backgroundColor: riteColors[rite] ? riteColors[rite].replace('0.6', '0.4') : 'rgba(0, 0, 0, 0.2)', // Fallback for undefined colors
-      stack: rite
-    });
+      const tripleCounts = bookOrder.map(book => {
+        const counts = bookVerseCountsByRite[rite][book] || { unique: 0, overlap: { 2: 0, 3: 0 } };
+        return counts.overlap[3] * 3; // 3x verses multiplied by 3
+      });
 
-    // Add dataset for 3x counts (multiplied for height)
-    datasets.push({
-      label: `${rite} 3x`,
-      data: tripleCounts,
-      backgroundColor: riteColors[rite] ? riteColors[rite].replace('0.6', '0.2') : 'rgba(0, 0, 0, 0.2)', // Use fallback color
-      stack: rite
-    });
+      // Add datasets for unique, 2x, and 3x counts (stacked by rite)
+      datasets.push({
+        label: `${rite} Unique`,
+        data: uniqueCounts,
+        backgroundColor: riteColors[rite],
+        stack: rite
+      });
+
+      datasets.push({
+        label: `${rite} 2x`,
+        data: doubleCounts,
+        backgroundColor: riteColors[rite] ? riteColors[rite].replace('0.6', '0.4') : 'rgba(0, 0, 0, 0.2)',
+        stack: rite
+      });
+
+      datasets.push({
+        label: `${rite} 3x`,
+        data: tripleCounts,
+        backgroundColor: riteColors[rite] ? riteColors[rite].replace('0.6', '0.2') : 'rgba(0, 0, 0, 0.2)',
+        stack: rite
+      });
+    }
   });
 
   // Render the chart
@@ -378,14 +343,14 @@ function createBookChart() {
       scales: {
         y: {
           beginAtZero: true,
-          stacked: true // Always stacked within each rite
+          // Ensure stacking is disabled when a parsha is selected
+          stacked: !selectedParsha
         }
       },
       plugins: {
         tooltip: {
           callbacks: {
             label: function(tooltipItem) {
-              // Display the actual count (not the multiplied value) in tooltips
               const datasetLabel = tooltipItem.dataset.label;
               const value = tooltipItem.raw;
               if (datasetLabel.includes('2x')) {
@@ -547,50 +512,94 @@ function populatePercentageTable() {
   });
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize these variables after the DOM is fully loaded
+  parshaSelect = document.getElementById('parsha-select');
+  weeklyReadingsContainer = document.getElementById('weekly-readings');
+  const bookChartContainer = document.getElementById('bookChartContainer'); // For hiding/showing the verse count chart
 
-// Event listeners for rite selection, chart order, and overlap toggle
-document.querySelectorAll("#rite-selection input[type=checkbox]").forEach(checkbox => {
-  checkbox.addEventListener('change', (event) => {
-    const rite = event.target.value;
-    if (event.target.checked) {
-      activeRites.add(rite);
-    } else {
-      activeRites.delete(rite);
-    }
-    toggleChartOrder();
-    createLengthChart();
-    populatePercentageTable();
-  });
-});
-
-document.querySelectorAll("#order-toggle input[type=radio]").forEach(radio => {
-  radio.addEventListener('change', (event) => {
-    chartOrder = event.target.value;
-    toggleChartOrder();
-  });
-});
-
-
-
-
-
-
-// Listen for dropdown changes and display selected parsha
-// Add Event Listener for Dropdown Changes (added only once)
-parshaSelect.addEventListener('change', async () => {
-  const selectedParsha = parshaSelect.value;
-
-  if (selectedParsha) {
-    // Filter charts based on the selected parsha
-    filterChartsByParsha(selectedParsha);
-    
-    // Generate the weekly readings section
-    await generateWeeklyReadings(selectedParsha);
-  } else {
-    // Clear charts and weekly readings if no selection
-    resetChartsAndReadings();
+  // Ensure elements are correctly found in the DOM
+  if (!parshaSelect || !weeklyReadingsContainer || !bookChartContainer) {
+    console.error("Error: Elements with IDs 'parsha-select', 'weekly-readings', or 'bookChartContainer' are not found in the DOM.");
+    return; // Stop further execution if elements are missing
   }
+
+  // Load data and set up page on load
+  loadHaftarahReadings().then(async () => {
+    populateDropdown();
+    await setDefaultParsha();
+
+    // Generate weekly readings and initial charts for default parsha
+    const initialParsha = parshaSelect.value;
+    if (initialParsha) {
+      bookChartContainer.style.display = 'none'; // Hide the verse count chart if a parsha is set
+      await generateWeeklyReadings(initialParsha);
+      createLengthChart(initialParsha);
+    } else {
+      bookChartContainer.style.display = 'block'; // Show the verse count chart if no parsha is set
+      createLengthChart(); // Create the unfiltered chart
+    }
+  });
+
+  // Event listener for dropdown changes
+  parshaSelect.addEventListener('change', async () => {
+    const selectedParsha = parshaSelect.value;
+
+    if (selectedParsha) {
+      // Hide the unfiltered verse count chart when a specific parsha is selected
+      bookChartContainer.style.display = 'none';
+
+      // Filter charts and readings based on the selected parsha
+      filterChartsByParsha(selectedParsha);
+      await generateWeeklyReadings(selectedParsha);
+      createLengthChart(selectedParsha); // Create the filtered length chart
+    } else {
+      // Show the verse count chart when no parsha is selected
+      bookChartContainer.style.display = 'block';
+
+      resetChartsAndReadings();
+    }
+  });
+
+  // Combined event listener for rite selection changes
+  document.querySelectorAll("#rite-selection input[type=checkbox]").forEach(checkbox => {
+    checkbox.addEventListener('change', async (event) => {
+      const rite = event.target.value;
+
+      if (event.target.checked) {
+        activeRites.add(rite);
+      } else {
+        activeRites.delete(rite);
+      }
+
+      // Regenerate weekly readings and charts based on the current parsha and active rites
+      const selectedParsha = parshaSelect.value;
+      if (selectedParsha) {
+        await generateWeeklyReadings(selectedParsha);
+        createLengthChart(selectedParsha); // Update filtered length chart
+      } else {
+        // If no specific parsha is selected, update the unfiltered chart
+        createLengthChart();
+      }
+      // Always update the chart order and any other charts that rely on rite selection
+      populatePercentageTable();
+    });
+  });
+
+  // Event listeners for order toggle
+  document.querySelectorAll("#order-toggle input[type=radio]").forEach(radio => {
+    radio.addEventListener('change', (event) => {
+      chartOrder = event.target.value;
+
+      // If no specific parsha is selected, toggle the chart order for the broad view
+      if (!parshaSelect.value) {
+        toggleChartOrder();
+      }
+    });
+  });
 });
+
+// Remove the duplicate event listener for `parshaSelect`
 
 // Function to filter charts based on the selected parsha
 function filterChartsByParsha(parsha) {
@@ -650,7 +659,7 @@ function filterChartsByParsha(parsha) {
 
   // Recreate charts and tables based on the filtered data
   toggleChartOrder();
-  createLengthChart();  // Ensure the chart is recreated with filtered data
+  createLengthChart(parsha);  // Ensure the chart is recreated with filtered data
   populatePercentageTable();
 }
 
