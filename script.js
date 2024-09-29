@@ -7,6 +7,8 @@ let bookOrder = [
   "Zephaniah", "Haggai", "Zechariah", "Malachi"
 ];
 
+
+
 // Total number of verses in each book of the Bible
 const totalVersesPerBook = {
   "Joshua": 658,
@@ -54,7 +56,7 @@ let bookChartInstance = null;  // To hold the Chart.js instance for the book cha
 let lengthChartInstance = null;  // To hold the Chart.js instance for the length chart
 let parshaSelect;
 let weeklyReadingsContainer;
-
+let longestToShortestChartInstance = null; // Global variable for the new chart
 
 
 
@@ -540,6 +542,9 @@ document.addEventListener('DOMContentLoaded', () => {
       createLengthChart(); // Create the unfiltered chart
       createBookChart(); // Create the unfiltered book chart
     }
+
+    // Create the longest to shortest Haftarah chart for all rites
+    createLongestToShortestChart(); // Call the new chart creation function here
   });
 
   // Event listener for dropdown changes
@@ -582,9 +587,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // If no specific parsha is selected, update the unfiltered chart
         createLengthChart();
       }
+
       // Always update the chart order and any other charts that rely on rite selection
       createBookChart(); // Recreate the book chart with the updated rites
       populatePercentageTable();
+
+      // Update longest to shortest Haftarah chart based on active rites
+      createLongestToShortestChart(); // Call this to update the new chart as well
     });
   });
 
@@ -597,6 +606,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!parshaSelect.value) {
         toggleChartOrder();
       }
+
+      // Recreate the longest to shortest Haftarah chart based on order selection
+      createLongestToShortestChart(); // Call this to ensure the order affects the new chart
     });
   });
 });
@@ -826,4 +838,80 @@ async function fetchHebrewTextRange(reference) {
     console.error(`Error fetching Hebrew text for reference: ${reference}`, error);
     return ["Error fetching text"];
   }
+}
+
+// Function to create the longest to shortest Haftarah chart
+function createLongestToShortestChart() {
+  const ctx = document.getElementById('longestToShortestChart').getContext('2d');
+
+  // Destroy any existing chart instance to avoid overlay issues
+  if (longestToShortestChartInstance) {
+    longestToShortestChartInstance.destroy();
+  }
+
+  // Filter rites based on active selection
+  const activeRiteList = Array.from(activeRites);
+
+  // Sort the haftarah readings for each rite by length
+  const sortedRitesData = {};
+  Object.keys(haftarahData).forEach(parsha => {
+    activeRiteList.forEach(rite => {
+      const readingData = haftarahData[parsha][rite];
+      if (readingData) {
+        const totalLength = readingData.total_length || 0;
+        if (!sortedRitesData[rite]) sortedRitesData[rite] = [];
+        sortedRitesData[rite].push({ parsha, totalLength });
+      }
+    });
+  });
+
+  // Sort the data for each rite based on the selected chart order
+  Object.keys(sortedRitesData).forEach(rite => {
+    if (chartOrder === "mostUsed") {
+      // Order by the total length of readings across all parshiot
+      sortedRitesData[rite].sort((a, b) => b.totalLength - a.totalLength);
+    } else {
+      // Default to the order as provided in the JSON file (natural order of parshiot)
+      sortedRitesData[rite].sort((a, b) => Object.keys(haftarahData).indexOf(a.parsha) - Object.keys(haftarahData).indexOf(b.parsha));
+    }
+  });
+
+  // Prepare datasets for the chart
+  const datasets = activeRiteList.map(rite => {
+    const parshaLabels = sortedRitesData[rite].map(item => item.parsha);
+    const totalLengths = sortedRitesData[rite].map(item => item.totalLength);
+
+    return {
+      label: rite,
+      data: totalLengths,
+      backgroundColor: riteColors[rite],
+      stack: rite
+    };
+  });
+
+  // Create the new Chart.js instance
+  longestToShortestChartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: Array.from(new Set(activeRiteList.flatMap(rite => sortedRitesData[rite].map(item => item.parsha)))),
+      datasets: datasets
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          stacked: false
+        }
+      },
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function(tooltipItem) {
+              return `${tooltipItem.dataset.label}: ${tooltipItem.raw} verses`;
+            }
+          }
+        }
+      }
+    }
+  });
 }
