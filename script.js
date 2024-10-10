@@ -1,5 +1,5 @@
 // Define rites and global variables for storing data
-const rites = ["Ashkenazi", "Sephardi", "Yemenite", "Italian", "Karaite", "Romaniote"];
+const rites = ["Chabad","Ashkenazi", "Sephardi", "Yemenite", "Italian", "Karaite", "Romaniote"];
 let bookOrder = [
   "Joshua", "Judges", "I Samuel", "II Samuel", "I Kings", "II Kings", 
   "Isaiah", "Jeremiah", "Ezekiel", "Hosea", "Joel", "Amos", 
@@ -40,8 +40,9 @@ const riteColors = {
   "Sephardi": "rgba(54, 162, 235, 0.6)",  // Blue
   "Yemenite": "rgba(75, 192, 192, 0.6)",  // Green
   "Italian": "rgba(153, 102, 255, 0.6)",  // Purple
-  "Karaite": "rgba(255, 206, 86, 0.6)",    // Yellow
-  "Romaniote": "rgba(0, 128, 128, 0.6)"   // Teal
+  "Karaite": "rgba(255, 206, 86, 0.6)",   // Yellow
+  "Romaniote": "rgba(0, 128, 128, 0.6)",  // Teal
+  "Chabad": "rgba(255, 159, 64, 0.6)"     // Orange
 };
 
 let haftarahData = {};
@@ -66,56 +67,67 @@ async function setDefaultParsha() {
     const response = await fetch('https://www.sefaria.org/api/calendars');
     const data = await response.json();
 
+    // Log to see the whole API response
+    console.log('[DefaultParsha] API Response:', data);
+
     // Find the Parashat Hashavua item
     const parshaItem = data.calendar_items.find(item => item.title.en === "Parashat Hashavua");
 
     if (parshaItem) {
       let parshaName = parshaItem.displayValue.en;
 
-      // Check for double parsha and apply the appropriate logic
+      // Log fetched parsha name
+      console.log('[DefaultParsha] Fetched Parsha Name:', parshaName);
+
+      // Check for double parsha and adjust accordingly
       if (parshaName.includes('-')) {
         if (parshaName === "Acharei Mot-Kedoshim") {
-          // Special case: Use the first part for "Acharei Mot-Kedoshim"
           parshaName = parshaName.split('-')[0].trim();
         } else {
-          // For all other double parshas, use the second part
           parshaName = parshaName.split('-')[1].trim();
         }
       }
 
-      console.log(`Today's parsha is: ${parshaName}`);
+      // Log the adjusted parsha name
+      console.log('[DefaultParsha] Adjusted Parsha Name:', parshaName);
 
-      // Set the dropdown to the current parsha
       let found = false;
       for (const option of parshaSelect.options) {
-        if (option.text === parshaName) {
+        // Normalize apostrophes for comparison
+        const normalizedOptionText = option.text.replace(/’/g, "'");
+        const normalizedParshaName = parshaName.replace(/’/g, "'");
+
+        // Log comparison of normalized dropdown options
+        console.log('[DefaultParsha] Comparing dropdown option:', normalizedOptionText, 'with parsha:', normalizedParshaName);
+        
+        if (normalizedOptionText === normalizedParshaName) {
           option.selected = true;
           found = true;
 
+          // Log match found
+          console.log('[DefaultParsha] Matched Parsha in dropdown:', normalizedParshaName);
+
           // Filter charts and generate readings based on the default parsha
-          filterChartsByParsha(parshaName);
-          await generateWeeklyReadings(parshaName);
+          filterChartsByParsha(normalizedParshaName);
+          await generateWeeklyReadings(normalizedParshaName);
 
           // Create the length chart for the default parsha
-          createLengthChart(parshaName); // Ensure length chart is filtered
+          createLengthChart(normalizedParshaName);
 
           break;
         }
       }
 
       if (!found) {
-        console.warn(`Parsha '${parshaName}' not found in dropdown options.`);
-        // If the default parsha is not found, reset everything
+        console.warn('[DefaultParsha] Parsha not found in dropdown:', parshaName);
         resetChartsAndReadings();
       }
     } else {
-      console.error("No 'Parashat Hashavua' item found in the calendar data.");
-      // If no default parsha is found, reset everything
+      console.error('[DefaultParsha] No Parashat Hashavua item found in the calendar data.');
       resetChartsAndReadings();
     }
   } catch (error) {
-    console.error('Error fetching current parsha:', error);
-    // If there's an error fetching the parsha, reset everything
+    console.error('[DefaultParsha] Error fetching current parsha:', error);
     resetChartsAndReadings();
   }
 }
